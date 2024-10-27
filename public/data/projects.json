@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Project 1",
+    "description": "A web app built with React and Node.js.",
+    "image": "/assets/project1.png",
+    "link": "https://github.com/user/project1"
+  },
+  {
+    "title": "Project 2",
+    "description": "A mobile app using React Native.",
+    "image": "/assets/project2.png",
+    "link": "https://github.com/user/project2"
+  },
+  {
+    "title": "Project 3",
+    "description": "An e-commerce site built with MERN stack.",
+    "image": "/assets/project3.png",
+    "link": "https://github.com/user/project3"
+  }
+]
