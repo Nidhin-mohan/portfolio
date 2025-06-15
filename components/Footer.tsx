@@ -33,7 +33,7 @@ const Footer = () => {
           </Link>
 
           <Link
-            href="mailto:alex@example.com"
+            href="mailto:nidhinmohannidhin@gmail.com.com"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             <Mail className="h-5 w-5" />

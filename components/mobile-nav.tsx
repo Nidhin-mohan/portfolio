@@ -87,7 +87,7 @@ export function MobileNav() {
               <div className="flex items-center justify-between py-4">
                 <Link href="/" className="flex items-center" onClick={closeMenu}>
                   <span className="font-bold text-xl bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-                    Alex.dev
+                    Nidhin.dev
                   </span>
                 </Link>
                 <Button
