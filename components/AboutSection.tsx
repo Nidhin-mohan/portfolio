@@ -1,8 +1,6 @@
-"use client";
+// "use client";
 
 import { AnimatedText } from "./animated-text";
-
-// import AnimatedText from "@/components/AnimatedText";
 
 export default function AboutSection() {
   return (
@@ -22,7 +20,7 @@ export default function AboutSection() {
                 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
               />
               <AnimatedText
-                text="I'm a full-stack developer with 3 years of experience building scalable and performant web applications."
+                text="I'm a full-stack developer with 3+ years of hands-on experience building scalable, efficient web applications using modern technologies."
                 className="max-w-[600px] text-muted-foreground md:text-xl"
               />
             </div>
@@ -30,19 +28,16 @@ export default function AboutSection() {
             {/* Bio */}
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I began my journey as a developer in 2021. Over the last 3
-                years, I’ve contributed to building modern, full-stack
-                applications for both startups and established businesses.
+                I started my professional journey in 2021, and since then, I’ve been deeply involved in building full-stack applications using the MERN stack. My work spans startups and enterprise solutions, where I focus on crafting performant, maintainable, and secure systems.
               </p>
               <p>
-                My primary expertise lies in React, Node.js, MongoDB, and
-                TypeScript. I've built robust backend services and dynamic
-                frontends, with a strong focus on performance and scalability.
+                I specialize in backend development with Node.js and MongoDB, implementing optimized queries, cron jobs, and complex business logic. On the frontend, I build elegant and responsive UIs using React, Tailwind CSS, and TypeScript—often using frameworks like ShadCN and Framer Motion.
               </p>
               <p>
-                I'm passionate about clean code, effective debugging, and
-                sharing knowledge—whether through open-source contributions,
-                technical blogs, or developer communities.
+                I’ve worked on diverse projects like a Channel Manager system (GraphQL, MongoDB, dynamic booking flows) and MoodMate (a mental wellness app with blog, mood analysis, and role-based access).
+              </p>
+              <p>
+                Beyond coding, I enjoy writing technical blogs to share my learnings—especially around MongoDB, performance tuning, and GraphQL. I’m passionate about clean code, debugging complex issues, and continuously learning to stay ahead in the tech space.
               </p>
             </div>
 

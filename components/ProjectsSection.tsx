@@ -25,33 +25,33 @@ const projects: Project[] = [
     demoUrl: "https://example.com",
     repoUrl: "https://github.com",
   },
-  {
-    title: "Dashboard UI",
-    description:
-      "An admin dashboard with data visualization, user management, and real-time analytics.",
-    image: "/placeholder.svg?height=400&width=600",
-    tags: ["React", "D3.js", "Firebase", "Material UI"],
-    demoUrl: "https://example.com",
-    repoUrl: "https://github.com",
-  },
-  {
-    title: "Social Media App",
-    description:
-      "A responsive social platform with user profiles, posts, and real-time messaging.",
-    image: "/placeholder.svg?height=400&width=600",
-    tags: ["React Native", "GraphQL", "AWS Amplify"],
-    demoUrl: "https://example.com",
-    repoUrl: "https://github.com",
-  },
-  {
-    title: "Portfolio Generator",
-    description:
-      "A tool that helps developers create professional portfolios with minimal configuration.",
-    image: "/placeholder.svg?height=400&width=600",
-    tags: ["Vue.js", "Node.js", "MongoDB"],
-    demoUrl: "https://example.com",
-    repoUrl: "https://github.com",
-  },
+  // {
+  //   title: "Dashboard UI",
+  //   description:
+  //     "An admin dashboard with data visualization, user management, and real-time analytics.",
+  //   image: "/placeholder.svg?height=400&width=600",
+  //   tags: ["React", "D3.js", "Firebase", "Material UI"],
+  //   demoUrl: "https://example.com",
+  //   repoUrl: "https://github.com",
+  // },
+  // {
+  //   title: "Social Media App",
+  //   description:
+  //     "A responsive social platform with user profiles, posts, and real-time messaging.",
+  //   image: "/placeholder.svg?height=400&width=600",
+  //   tags: ["React Native", "GraphQL", "AWS Amplify"],
+  //   demoUrl: "https://example.com",
+  //   repoUrl: "https://github.com",
+  // },
+  // {
+  //   title: "Portfolio Generator",
+  //   description:
+  //     "A tool that helps developers create professional portfolios with minimal configuration.",
+  //   image: "/placeholder.svg?height=400&width=600",
+  //   tags: ["Vue.js", "Node.js", "MongoDB"],
+  //   demoUrl: "https://example.com",
+  //   repoUrl: "https://github.com",
+  // },
 ];
 
 export default function ProjectsSection() {
@@ -97,7 +97,11 @@ export default function ProjectsSection() {
             asChild
             className="rounded-full border-2 hover:border-primary/50 transition-all duration-300 bg-background/50 backdrop-blur-sm"
           >
-            <Link href="https://github.com" target="_blank" rel="noreferrer">
+            <Link
+              href="https://github.com/Nidhin-mohan"
+              target="_blank"
+              rel="noreferrer"
+            >
               View More on GitHub
             </Link>
           </Button>
