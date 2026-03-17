@@ -45,7 +45,7 @@ export function MobileNav() {
       transition: {
         delay: i * 0.08 + 0.2,
         duration: 0.3,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     }),
   };
