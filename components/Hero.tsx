@@ -5,23 +5,34 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   ChevronDown,
-  Code,
+  Server,
   Database,
-  Zap,
-  Award,
+  GitBranch,
+  Terminal,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { HeroAnimation } from "./hero-animation";
-import { FloatingShapes } from "./floating-shapes";
 
-const techBadges = [
-  { icon: Zap, label: "React & Next.js" },
-  { icon: Code, label: "TypeScript & Node.js" },
-  { icon: Database, label: "MongoDB & SQL" },
-  { icon: Code, label: "REST & GraphQL" },
+const techFocus = [
+  { icon: Terminal, label: "TypeScript & Node.js" },
+  { icon: Database, label: "MongoDB & GraphQL" },
+  { icon: Server, label: "REST & API Design" },
+  { icon: GitBranch, label: "CI/CD & Docker" },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export default function Hero() {
   return (
@@ -29,63 +40,67 @@ export default function Hero() {
       id="hero"
       className="relative min-h-[90vh] flex items-center overflow-hidden"
     >
-      {/* Background Animation */}
-      <div className="absolute inset-0 z-0">
-        <HeroAnimation />
-      </div>
-      <FloatingShapes />
+      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-20" />
+      <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
 
       <div className="container relative z-10 px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
           {/* Left Content */}
           <div className="flex flex-col space-y-8">
-            {/* Availability Banner */}
-            <div className="inline-flex items-center space-x-2 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              <span>Currently open for freelance & full-time roles</span>
-            </div>
+            <motion.div variants={itemVariants}>
+              <div className="inline-flex items-center space-x-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary border border-primary/20">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                <span>Open to full-time roles</span>
+              </div>
+            </motion.div>
 
-            {/* Headline */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-                <span className="block">Building Scalable</span>
+            <motion.div variants={itemVariants} className="space-y-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+                <span className="block text-foreground">Full-stack developer</span>
+                <span className="block text-foreground">with a</span>
                 <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-                  Full-Stack Solutions
+                  backend focus.
                 </span>
               </h1>
-              <p className="max-w-[600px] text-muted-foreground text-lg md:text-xl">
-                I'm a Full-Stack Developer with 3 years of experience creating
-                fast, reliable, and scalable web applications using modern
-                technologies.
+              <p className="max-w-[540px] text-muted-foreground text-lg leading-relaxed">
+                3+ years building production web apps with the MERN stack.
+                I spend most of my time in{" "}
+                <strong className="text-foreground">Node.js</strong>,{" "}
+                <strong className="text-foreground">MongoDB</strong>, and{" "}
+                <strong className="text-foreground">GraphQL</strong> — designing
+                schemas, writing APIs, and fixing the bugs nobody else wants to touch.
               </p>
-            </div>
+            </motion.div>
 
-            {/* Tech Badges */}
-            <div className="flex flex-wrap gap-3">
-              {techBadges.map(({ icon: Icon, label }) => (
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+              {techFocus.map(({ icon: Icon, label }) => (
                 <Badge
                   key={label}
-                  className="bg-background/50 backdrop-blur-sm border-primary/20 px-3 py-1 text-sm"
+                  className="bg-background/50 backdrop-blur-sm border-primary/20 px-3 py-1.5 text-sm font-medium"
                   variant="outline"
                 >
-                  <Icon className="mr-1 h-3 w-3" />
+                  <Icon className="mr-1.5 h-3.5 w-3.5" />
                   {label}
                 </Badge>
               ))}
-            </div>
+            </motion.div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3">
               <Button
                 asChild
                 size="lg"
                 className="rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-300 bg-gradient-to-r from-primary to-primary/80"
               >
                 <Link href="/#projects">
-                  See My Projects <ArrowRight className="ml-2 h-4 w-4" />
+                  See My Work <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button
@@ -94,31 +109,16 @@ export default function Hero() {
                 asChild
                 className="rounded-full border-2 hover:border-primary/50 transition-all duration-300"
               >
-                <Link href="/#contact">Let's Connect</Link>
+                <Link href="/#contact">Get In Touch</Link>
               </Button>
-            </div>
+            </motion.div>
           </div>
-              <ExperienceCard />
-          {/* Experience Card (Right Side)
-          <div className="relative hidden lg:block">
-            <div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
-            <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
 
-            <div className="relative z-10 aspect-square rounded-2xl border-2 border-primary/10 bg-background/50 p-6 backdrop-blur-sm shadow-xl flex flex-col justify-center items-center text-center space-y-4">
-              <div className="text-5xl font-bold text-primary">3+</div>
-              <div className="text-lg text-muted-foreground">
-                Years of Experience
-              </div>
-              <p className="text-sm max-w-[250px] text-muted-foreground">
-                Delivering clean code, scalable systems, and engaging user
-                experiences from frontend to backend.
-              </p>
-            </div>
-          </div> */}
-        </div>
+          {/* Right Side - Quick Stats */}
+          <QuickStats />
+        </motion.div>
       </div>
 
-      {/* Scroll Down Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
         <Link
           href="/#projects"
@@ -132,61 +132,32 @@ export default function Hero() {
   );
 }
 
+function QuickStats() {
+  const stats = [
+    { metric: "3+", label: "Years Experience", detail: "MERN stack, TypeScript-first" },
+    { metric: "5+", label: "Production Apps", detail: "Startups & enterprise" },
+    { metric: "GraphQL", label: "& REST APIs", detail: "Schema design, resolvers, caching" },
+    { metric: "AWS", label: "& Docker", detail: "EC2, S3, CI/CD pipelines" },
+  ];
 
-
- function ExperienceCard() {
   return (
     <motion.div
-      whileHover={{
-        scale: 1.06,
-        rotateX: 3,
-        rotateY: -3,
-      }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="relative hidden lg:flex items-center justify-center"
+      variants={itemVariants}
+      className="hidden lg:grid grid-cols-2 gap-4"
     >
-      {/* Background Glows */}
-      <div className="absolute -top-28 -left-28 h-72 w-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-28 -right-28 h-72 w-72 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
-
-      {/* Card */}
-      <div className="relative z-10 w-96 h-96 p-8 rounded-3xl backdrop-blur-xl border border-primary/10 bg-background/60 shadow-[0_10px_40px_rgba(0,0,0,0.08)] flex flex-col items-center justify-center text-center space-y-5 transition-all">
-        {/* Icon */}
-        <div className="flex items-center justify-center bg-primary/10 text-primary rounded-full p-4">
-          <Award className="h-8 w-8" />
-        </div>
-
-        {/* Big Number */}
+      {stats.map((item, index) => (
         <motion.div
-          initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-6xl font-extrabold text-primary"
+          key={item.label}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+          className="p-6 rounded-2xl border border-primary/10 bg-background/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-300"
         >
-          3+
+          <div className="text-2xl font-bold text-primary mb-1">{item.metric}</div>
+          <div className="text-sm font-semibold text-foreground mb-1">{item.label}</div>
+          <div className="text-xs text-muted-foreground">{item.detail}</div>
         </motion.div>
-
-        {/* Label */}
-        <div className="text-lg font-semibold text-muted-foreground tracking-wide uppercase">
-          Years of Experience
-        </div>
-
-        {/* Description */}
-        <p className="text-base text-muted-foreground max-w-[280px] leading-relaxed">
-          Delivering performant full-stack apps, responsive UIs, and seamless
-          experiences — from concept to production.
-        </p>
-
-        {/* Tagline */}
-        <motion.span
-          className="text-sm text-primary/80 font-medium tracking-tight mt-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          Always learning. Always shipping.
-        </motion.span>
-      </div>
+      ))}
     </motion.div>
   );
 }

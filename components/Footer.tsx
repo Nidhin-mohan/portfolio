@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="w-full border-t py-6 md:py-0 bg-background/80 backdrop-blur-sm">
       <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
         <p className="text-sm text-muted-foreground">
-          © 2025 Nidhin Developer. All rights reserved.
+          Built with Next.js, TypeScript & Tailwind CSS. No templates.
         </p>
 
         <div className="flex items-center gap-4">
@@ -23,7 +23,7 @@ const Footer = () => {
           </Link>
 
           <Link
-            href="https://www.linkedin.com/in/nidhinm"
+            href="https://www.linkedin.com/in/nidhinm/"
             target="_blank"
             rel="noreferrer"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -33,7 +33,7 @@ const Footer = () => {
           </Link>
 
           <Link
-            href="mailto:nidhinmohannidhin@gmail.com.com"
+            href="mailto:nidhinmohannidhin@gmail.com"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             <Mail className="h-5 w-5" />

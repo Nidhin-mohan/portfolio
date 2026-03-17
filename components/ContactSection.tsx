@@ -1,105 +1,84 @@
 "use client";
 
-// import AnimatedText from "@/components/AnimatedText";
-import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
 import Link from "next/link";
+import { Mail, Github, Linkedin, FileText } from "lucide-react";
 import { AnimatedText } from "./animated-text";
+
+const contactLinks = [
+  {
+    icon: Mail,
+    label: "nidhinmohannidhin@gmail.com",
+    href: "mailto:nidhinmohannidhin@gmail.com",
+    description: "For opportunities & collaboration",
+  },
+  {
+    icon: Github,
+    label: "github.com/Nidhin-mohan",
+    href: "https://github.com/Nidhin-mohan",
+    description: "Code & open source",
+  },
+  {
+    icon: Linkedin,
+    label: "linkedin.com/in/nidhinm",
+    href: "https://www.linkedin.com/in/nidhinm/",
+    description: "Professional network",
+  },
+  {
+    icon: FileText,
+    label: "Technical Blog",
+    href: "https://hashnode.com/@nidhinmohan",
+    description: "Writing on MongoDB, GraphQL & backend patterns",
+  },
+];
 
 export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden"
+      className="w-full py-16 md:py-24 lg:py-32 relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-30"></div>
+      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-20" />
       <div className="container px-4 md:px-6 relative">
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
+        <div className="max-w-2xl mx-auto text-center">
+          {/* Header */}
+          <div className="space-y-4 mb-12">
             <AnimatedText
-              text="Get In Touch"
+              text="Let's Talk"
               className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
             />
-            <AnimatedText
-              text="Have a project in mind or want to discuss opportunities? I'd love to hear from you."
-              className="mx-auto max-w-[700px] text-muted-foreground md:text-xl"
-            />
+            <p className="text-muted-foreground text-lg">
+              Looking for a backend-heavy full-stack engineer? I&apos;m interested in
+              roles focused on system design, API architecture, and building
+              infrastructure that other developers depend on.
+            </p>
           </div>
-        </div>
 
-        {/* Contact Form */}
-        <div className="mx-auto max-w-lg space-y-6 py-12">
-          <form className="grid gap-6">
-            {/* Name */}
-            <div className="grid gap-3">
-              <label
-                htmlFor="name"
-                className="text-sm font-medium leading-none"
-              >
-                Name
-              </label>
-              <input
-                id="name"
-                className="flex h-10 w-full rounded-md border-2 border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary/50 transition-all duration-300"
-                placeholder="Enter your name"
-                required
-              />
-            </div>
-
-            {/* Email */}
-            <div className="grid gap-3">
-              <label
-                htmlFor="email"
-                className="text-sm font-medium leading-none"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                className="flex h-10 w-full rounded-md border-2 border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary/50 transition-all duration-300"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-
-            {/* Message */}
-            <div className="grid gap-3">
-              <label
-                htmlFor="message"
-                className="text-sm font-medium leading-none"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                className="flex min-h-[120px] w-full rounded-md border-2 border-input bg-background/50 backdrop-blur-sm px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:border-primary/50 transition-all duration-300"
-                placeholder="Enter your message"
-                required
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-300 bg-gradient-to-r from-primary to-primary/80"
-            >
-              Send Message
-            </Button>
-          </form>
-
-          {/* Alternative Contact */}
-          <div className="flex flex-col items-center space-y-2 text-center">
-            <p className="text-muted-foreground">Or reach out directly via:</p>
-            <div className="flex space-x-4">
-              <Link
-                href="mailto:nidhinmohannidhin@gmail.com"
-                className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                <Mail className="h-5 w-5" />
-                <span>nidhinmohannidhin@gmail.com</span>
-              </Link>
-            </div>
+          {/* Contact Links */}
+          <div className="grid gap-4 sm:grid-cols-2 text-left">
+            {contactLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={link.href.startsWith("mailto") ? undefined : "noreferrer"}
+                  className="group flex items-start gap-4 p-4 rounded-xl border border-primary/10 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-colors"
+                >
+                  <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">
+                      {link.label}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {link.description}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -5,14 +5,23 @@ import { Code, Github, Linkedin } from "lucide-react";
 import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "./theme-toggle";
 
+const navItems = [
+  { name: "Projects", href: "/#projects" },
+  { name: "Experience", href: "/#experience" },
+  { name: "About", href: "/#about" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Principles", href: "/#principles" },
+  { name: "Contact", href: "/#contact" },
+];
+
 const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-primary/10 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30">
       <div className="container flex h-16 items-center justify-between">
-        {/* Logo + Name */}
+        {/* Logo */}
         <div className="flex items-center gap-2">
           <div className="mr-2 h-8 w-8 overflow-hidden rounded-full bg-gradient-to-br from-primary to-primary/60 p-[2px]">
-            <div className="flex h-full w-full items-center justify-center rounded-full bg-background dark:bg-background">
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-background">
               <Code className="h-4 w-4 text-primary" />
             </div>
           </div>
@@ -24,20 +33,20 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {["Projects", "About", "Skills", "Contact"].map((item) => (
+        <nav className="hidden lg:flex items-center space-x-5">
+          {navItems.map((item) => (
             <Link
-              key={item}
-              href={`/#${item.toLowerCase()}`}
+              key={item.name}
+              href={item.href}
               className="group relative text-sm font-medium transition-colors"
             >
-              {item}
-              <span className="absolute inset-x-0 -bottom-1 h-0.5 scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"></span>
+              {item.name}
+              <span className="absolute inset-x-0 -bottom-1 h-0.5 scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
             </Link>
           ))}
         </nav>
 
-        {/* Right Side Icons & Theme */}
+        {/* Right Side */}
         <div className="flex items-center gap-4">
           <ThemeToggle />
 
