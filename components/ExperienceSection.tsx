@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AnimatedText } from "./animated-text";
-import { Badge } from "@/components/ui/badge";
 
 interface Experience {
   role: string;
@@ -20,10 +18,10 @@ const experiences: Experience[] = [
     period: "2022 – Present",
     type: "Full-time",
     bullets: [
-      "Built a Channel Manager system that syncs room availability across booking platforms — handles 5,000+ sync operations daily with cron-based jobs and checkpoint recovery",
+      "Built a Channel Manager that syncs room availability across booking platforms — handles 5,000+ sync operations daily with cron-based jobs and checkpoint recovery",
       "Migrated REST endpoints to GraphQL for a deeply nested booking/room/rate data model, reducing frontend round-trips by ~60%",
       "Designed MongoDB aggregation pipelines for availability reporting, replacing a manual Excel process that took ~4 hours per day",
-      "Introduced TypeScript across the backend codebase, cutting down runtime type errors that were causing ~3 production bugs per month",
+      "Introduced TypeScript across the backend codebase, cutting runtime type errors that caused ~3 production bugs per month",
       "Implemented optimistic concurrency control for concurrent booking updates — stopped silent data overwrites from multiple OTA sources",
     ],
     stack: ["Node.js", "GraphQL", "MongoDB", "TypeScript", "Docker", "AWS"],
@@ -45,63 +43,73 @@ const experiences: Experience[] = [
 
 export default function ExperienceSection() {
   return (
-    <section
-      id="experience"
-      className="w-full py-16 md:py-24 lg:py-32 relative overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-20" />
-      <div className="container px-4 md:px-6 relative">
+    <section id="experience" className="w-full py-20 md:py-28 relative">
+      <div className="container px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="space-y-4 mb-12">
-            <AnimatedText
-              text="Experience"
-              className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
-            />
-            <p className="max-w-[600px] text-muted-foreground text-lg">
-              What I&apos;ve shipped and the impact it had — not just what was in my job description.
+          {/* Header */}
+          <div className="mb-12">
+            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
+              02 · Experience
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
+              What I&apos;ve shipped
+            </h2>
+            <p className="text-muted-foreground">
+              Impact and outcomes — not just job descriptions.
             </p>
           </div>
 
-          <div className="space-y-8">
+          {/* Timeline */}
+          <div className="space-y-10">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.role + exp.company}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.45, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative pl-8 border-l-2 border-primary/20"
+                className="relative pl-6 border-l border-border"
               >
-                <div className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-background" />
+                {/* Timeline dot */}
+                <div className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-primary bg-background" />
 
+                {/* Role + company */}
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
-                  <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
-                    <span>{exp.company}</span>
-                    <span className="text-primary/40">·</span>
-                    <span className="text-sm">{exp.period}</span>
-                    <Badge variant="outline" className="text-xs font-mono">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-0.5">
+                    <h3 className="text-lg font-semibold text-foreground">{exp.role}</h3>
+                    <span className="font-mono text-xs border border-border rounded px-1.5 py-0.5 text-muted-foreground">
                       {exp.type}
-                    </Badge>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span>{exp.company}</span>
+                    <span className="text-border">·</span>
+                    <span className="font-mono text-xs">{exp.period}</span>
                   </div>
                 </div>
 
-                <ul className="space-y-3 mb-4">
+                {/* Bullets */}
+                <ul className="space-y-2.5 mb-5">
                   {exp.bullets.map((point, i) => (
                     <li
                       key={i}
-                      className="text-sm text-muted-foreground leading-relaxed pl-4 border-l-2 border-primary/10"
+                      className="flex gap-3 text-sm text-muted-foreground leading-relaxed"
                     >
-                      {point}
+                      <span className="text-primary/50 select-none mt-0.5 shrink-0">→</span>
+                      <span>{point}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="flex flex-wrap gap-2">
+                {/* Stack */}
+                <div className="flex flex-wrap gap-1.5">
                   {exp.stack.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="bg-secondary/50 text-xs font-mono">
+                    <span
+                      key={tech}
+                      className="font-mono text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded"
+                    >
                       {tech}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
               </motion.div>

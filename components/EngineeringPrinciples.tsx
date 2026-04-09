@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AnimatedText } from "./animated-text";
 
 const principles = [
   {
@@ -28,39 +27,42 @@ const principles = [
 
 export default function EngineeringPrinciples() {
   return (
-    <section
-      id="principles"
-      className="w-full py-16 md:py-24 lg:py-32 relative overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-20" />
-      <div className="container px-4 md:px-6 relative">
+    <section id="principles" className="w-full py-20 md:py-28 relative">
+      <div className="container px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="space-y-4 mb-12">
-            <AnimatedText
-              text="How I Work"
-              className="text-3xl font-bold tracking-tighter sm:text-5xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
-            />
-            <p className="max-w-[600px] text-muted-foreground text-lg">
+          {/* Header */}
+          <div className="mb-12">
+            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
+              05 · Principles
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
+              How I work
+            </h2>
+            <p className="text-muted-foreground max-w-lg">
               A few principles that guide how I write code and make technical decisions.
             </p>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          {/* Principles list */}
+          <div className="divide-y divide-border">
             {principles.map((principle, index) => (
               <motion.div
                 key={principle.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-xl border border-primary/10 bg-card/50 backdrop-blur-sm hover:border-primary/25 transition-colors"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-8 py-7"
               >
-                <h3 className="font-semibold text-foreground mb-2">
-                  {principle.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {principle.description}
-                </p>
+                <span className="font-mono text-3xl font-bold text-primary/15 shrink-0 sm:w-14 sm:text-right leading-none select-none">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">{principle.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {principle.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
