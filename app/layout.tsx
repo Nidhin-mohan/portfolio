@@ -8,6 +8,11 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Nidhin Mohan | Full-Stack Developer — Backend Systems & APIs",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   description:
     "Full-stack developer with a backend focus. 3+ years building production MERN applications with TypeScript, MongoDB, and GraphQL.",
   keywords: [
