@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -17,52 +17,40 @@ interface Project {
   title: string;
   subtitle: string;
   category: string;
+  type: "Professional" | "Personal";
   problem: string;
   whatIBuilt: string;
   hardPart: string;
   stack: string[];
-  demoUrl?: string;
   repoUrl?: string;
 }
 
 const projects: Project[] = [
   {
-    title: "Channel Manager",
-    subtitle: "Multi-tenant booking sync system",
+    title: "Hospitality PMS & Channel Manager",
+    subtitle: "Integrated property management and OTA distribution platform",
     category: "Backend-Heavy",
+    type: "Professional",
     problem:
-      "Hotels needed to keep room availability in sync across multiple booking platforms. Stale data meant double-bookings and lost revenue.",
+      "Hotels need a single system to manage their full operations — room inventory, bookings, billing — and simultaneously keep availability, rates, and reservations in sync across multiple OTA distribution channels (Simplotel, etc.) and third-party PMS integrations. Keeping this data consistent across systems without overbooking is the core reliability problem.",
     whatIBuilt:
-      "GraphQL API with MongoDB as the primary store. Cron-based sync jobs that poll external OTAs and reconcile availability. Multi-tenant data isolation through compound indexes. Chose embedded documents for rate plans (read-heavy) but references for bookings (write-heavy) to match access patterns.",
+      "Built the backend for a combined PMS and Channel Manager platform. On the PMS side: redesigned the room occupancy and pricing model to be fully configurable per hotel (replaced a hard-coded fixed-limit system), updated the booking engine to support dynamic occupancy rules and channel-aligned pricing, and built a Billing & Invoicing Module covering Proforma Invoices, Tax Invoices (B2B & B2C), split billing, bill merging, and activity-based restaurant billing. On the distribution side: integrated Simplotel and other OTAs via third-party APIs and webhooks, and wired up integrations with external PMS systems. Built sales reports and dashboards for revenue, billing, and payment trends.",
     hardPart:
-      "Race conditions during concurrent booking updates from multiple sources. Used MongoDB's version field for optimistic concurrency — if two updates conflict, the later one retries instead of silently overwriting. Also had to make sync jobs idempotent so a failure mid-run could resume from a checkpoint.",
-    stack: ["Node.js", "GraphQL", "MongoDB", "TypeScript", "Docker", "Cron Jobs"],
-    repoUrl: "https://github.com/Nidhin-mohan",
+      "The OTA sync pipeline had a severe N+1 query problem — 401 MongoDB queries per cron cycle. It looked fine in dev with small data, but in production it became a hard ceiling on how many OTAs we could support. Profiling with realistic data identified the pattern. Refactored to batch all lookups upfront: 401 queries collapsed to 5 (99% reduction), enabling 10x more OTA integrations without infrastructure changes. Also introduced bulk API calls, reducing external API traffic by ~96% per channel.",
+    stack: ["Node.js", "TypeScript", "GraphQL", "MongoDB", "Redis", "Docker", "AWS EC2/S3", "PM2"],
   },
   {
     title: "MoodMate",
     subtitle: "Mental wellness tracking platform",
     category: "Full-Stack",
+    type: "Personal",
     problem:
-      "Users needed a private way to track moods over time and understand patterns — not just log entries, but see trends.",
+      "Users needed a private way to track moods over time and understand patterns — not just log entries, but surface real trends. Therapists needed a separate view with different data access boundaries from regular users.",
     whatIBuilt:
-      "MERN app with role-based access (user, therapist, admin). Custom RBAC instead of third-party auth because I needed fine-grained control over therapist-patient data boundaries. Mood analytics built with MongoDB aggregation pipelines — keeps computation server-side. Blog module with sanitized markdown.",
+      "MERN app with layered architecture (Controllers → Services → Repositories) and a generic BaseRepository pattern for reusable CRUD operations. Custom JWT-based RBAC with three roles (user, therapist, admin) — fine-grained control over therapist-patient data boundaries without a third-party auth service. Mood analytics built with MongoDB aggregation pipelines, keeping computation server-side. Full CI/CD pipeline with GitHub Actions: automated tests, Docker image builds pushed to AWS ECR, deployed to EC2 with static assets served via S3 and CloudFront.",
     hardPart:
-      "Designing the mood data model to support both quick daily entries and efficient trend queries. Settled on date-bucketed documents that MongoDB's aggregation framework can window over without scanning the entire collection.",
-    stack: ["React", "Node.js", "MongoDB", "Express", "TypeScript", "JWT", "AWS S3"],
-    repoUrl: "https://github.com/Nidhin-mohan",
-  },
-  {
-    title: "E-Commerce Platform",
-    subtitle: "Online store with real payment processing",
-    category: "Full-Stack",
-    problem:
-      "Needed a working e-commerce system — not a demo with fake checkout, but real Stripe integration, inventory tracking, and an admin panel.",
-    whatIBuilt:
-      "Next.js frontend with SSR for product pages (SEO). Node.js API handling cart, orders, and Stripe webhooks. Used webhooks for payment confirmation instead of client-side callbacks — eliminates bugs where a browser closes mid-payment. Server-side cart state tied to sessions, not localStorage.",
-    hardPart:
-      "Inventory race conditions during high traffic. Implemented a reservation system: adding to cart creates a time-limited hold, checkout atomically decrements stock with a 'stock > 0' condition in MongoDB. Simple, but it works.",
-    stack: ["Next.js", "TypeScript", "Stripe", "MongoDB", "Node.js", "Tailwind CSS"],
+      "Designing the mood data model to support both quick daily log entries and efficient trend queries across date ranges, without scanning the full collection. Settled on date-bucketed documents that MongoDB's aggregation framework can window over efficiently. Building the full AWS deployment pipeline (ECR → EC2 → CloudFront) end-to-end solo surfaced a lot of infrastructure knowledge I hadn't had before.",
+    stack: ["React", "Node.js", "MongoDB", "TypeScript", "Docker", "AWS ECR/EC2/S3/CloudFront", "GitHub Actions", "JWT"],
     repoUrl: "https://github.com/Nidhin-mohan",
   },
 ];
@@ -122,6 +110,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <span className="font-mono text-xs text-muted-foreground border border-border rounded px-1.5 py-0.5">
               {project.category}
             </span>
+            <span className={`font-mono text-xs rounded px-1.5 py-0.5 ${
+              project.type === "Professional"
+                ? "bg-primary/10 text-primary/70 border border-primary/20"
+                : "bg-muted text-muted-foreground border border-border"
+            }`}>
+              {project.type}
+            </span>
           </div>
           <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
           <p className="text-sm text-muted-foreground">{project.subtitle}</p>
@@ -132,14 +127,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <Link href={project.repoUrl} target="_blank" rel="noreferrer">
                 <GithubIcon className="mr-1.5 h-3 w-3" />
                 Code
-              </Link>
-            </Button>
-          )}
-          {project.demoUrl && (
-            <Button size="sm" asChild className="rounded-full h-8 text-xs">
-              <Link href={project.demoUrl} target="_blank" rel="noreferrer">
-                <ExternalLink className="mr-1.5 h-3 w-3" />
-                Demo
               </Link>
             </Button>
           )}

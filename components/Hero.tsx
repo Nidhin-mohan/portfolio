@@ -57,20 +57,19 @@ export default function Hero() {
             variants={item}
             className="text-muted-foreground text-lg leading-relaxed max-w-xl mb-8"
           >
-            3+ years building production MERN apps. I live in{" "}
+            3 years building integration-heavy B2B SaaS in the hospitality domain. I live in{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
               Node.js
             </code>
             ,{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
-              MongoDB
+              TypeScript
             </code>
             , and{" "}
             <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
-              GraphQL
+              MongoDB
             </code>{" "}
-            — designing schemas, writing APIs, and fixing the bugs nobody else
-            wants to touch.
+            — building OTA sync pipelines, billing systems, and APIs that real hotels depend on daily.
           </motion.p>
 
           {/* Terminal block */}
@@ -84,13 +83,13 @@ export default function Hero() {
                 <span className="text-muted-foreground select-none">&gt; </span>
                 <span className="text-primary">nidhin</span>
                 <span className="text-muted-foreground">
-                  {" "}· full-stack · backend focus · 3yr exp
+                  {" "}· software engineer · backend focus · Kochi, India
                 </span>
               </div>
               <div>
                 <span className="text-muted-foreground select-none">&gt; </span>
                 <span className="text-muted-foreground">
-                  TypeScript · Node.js · GraphQL · MongoDB
+                  Node.js · TypeScript · React · MongoDB · Redis · BullMQ
                 </span>
               </div>
             </div>

@@ -59,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.variable, jetbrainsMono.variable, "font-sans antialiased")}>
+      <body suppressHydrationWarning className={cn(inter.variable, jetbrainsMono.variable, "font-sans antialiased")}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>

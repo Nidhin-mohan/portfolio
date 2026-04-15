@@ -4,28 +4,28 @@ import { motion } from "framer-motion";
 
 const journey = [
   {
-    year: "2021",
-    title: "Started with Frontend",
+    year: "2020",
+    title: "Diploma & First Steps Into Code",
     description:
-      "React, component libraries, responsive layouts. Got comfortable with the UI side, then got curious about what happens after the button click.",
+      "Completed a Diploma in Electronics and Communication. Got curious about web development on the side — started with HTML, CSS, and JavaScript. Self-taught path began here.",
   },
   {
-    year: "2022",
-    title: "Moved to Full-Stack",
+    year: "2021–22",
+    title: "Full-Stack Bootcamp & Building",
     description:
-      "Picked up Node.js, Express, and MongoDB. Built my first production API. Learned schema design by making mistakes and fixing them under pressure.",
+      "Completed a Full Stack JavaScript bootcamp. Built personal projects with React and Node.js, learned Express, MongoDB schema design by making mistakes, and got comfortable shipping things end-to-end.",
   },
   {
     year: "2023",
-    title: "Backend-Heavy Work",
+    title: "First Professional Role",
     description:
-      "Built a Channel Manager with GraphQL, cron jobs, and multi-tenant data. Started caring more about data modeling and error handling than pixel-perfect UIs.",
+      "Joined a multi-tenant enterprise SaaS team. Learned what it means to write code that multiple client organizations depend on — production bug fixes, performance tuning, BullMQ background jobs, and CI/CD with Azure DevOps.",
   },
   {
-    year: "2024–Now",
-    title: "Growing as an Engineer",
+    year: "2025–Now",
+    title: "Backend-Heavy Systems in Hospitality",
     description:
-      "Docker, AWS, CI/CD. Building MoodMate as a proper production app — role-based access, analytics, structured error handling. Learning what it takes to ship and maintain.",
+      "Building a PMS and Channel Manager that syncs room inventory, rates, and bookings across OTA platforms. Solved a 99% query bottleneck, built a billing module covering multiple invoice types, and manage staging deployments on AWS EC2 and S3.",
   },
 ];
 
@@ -50,27 +50,35 @@ export default function AboutSection() {
           <div className="grid gap-6 lg:grid-cols-2 mb-16 text-muted-foreground leading-relaxed text-[0.9375rem]">
             <div className="space-y-4">
               <p>
-                I&apos;m a full-stack developer who gravitates toward the backend. I enjoy the
-                problems that live there — data modeling, query performance, API design,
-                figuring out why something fails silently at 2 AM.
+                I&apos;m a full-stack engineer with a strong backend focus. My day-to-day is building
+                the systems that hotels and hospitality businesses depend on — OTA sync pipelines,
+                billing engines, room pricing logic, and the APIs that connect it all.
               </p>
               <p>
-                Most of my experience is in the MERN stack with{" "}
+                Most of my work lives in{" "}
+                <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
+                  Node.js
+                </code>{" "}
+                and{" "}
                 <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
                   TypeScript
                 </code>
-                . I&apos;ve built GraphQL APIs with complex resolvers,{" "}
+                , with{" "}
                 <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
                   MongoDB
                 </code>{" "}
-                schemas that handle real business logic, and cron jobs that need to be reliable
-                — not just &quot;run and hope.&quot;
+                as the primary store. I&apos;ve built GraphQL APIs, designed aggregation pipelines for
+                reporting, and wired up{" "}
+                <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
+                  BullMQ
+                </code>{" "}
+                queues for background jobs that have to be reliable — not just &quot;run and hope.&quot;
               </p>
             </div>
             <div className="space-y-4">
               <p>
-                I care about error handling, clear logging, and writing code that the next person
-                can actually understand.{" "}
+                I care about error handling, structured logging, and writing code that the next person
+                can actually read.{" "}
                 <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
                   TypeScript
                 </code>{" "}
@@ -120,7 +128,9 @@ export default function AboutSection() {
               <h3 className="font-mono text-xs text-muted-foreground uppercase tracking-widest mb-3">
                 // education
               </h3>
-              <p className="text-sm text-muted-foreground">BSc in Computer Science (2017–2021)</p>
+              <p className="text-sm text-foreground font-medium">Diploma in Electronics and Communication</p>
+              <p className="text-sm text-muted-foreground">Govt Polytechnic Cherthala · 2020 · Grade 8/10</p>
+              <p className="text-xs text-muted-foreground/60 mt-1">15 years of formal education</p>
             </div>
             <div>
               <h3 className="font-mono text-xs text-muted-foreground uppercase tracking-widest mb-3">
@@ -128,9 +138,7 @@ export default function AboutSection() {
               </h3>
               <ul className="space-y-1.5 text-sm text-muted-foreground">
                 {[
-                  "AWS Certified Developer – Associate",
-                  "Meta Full-Stack Developer Certificate",
-                  "MongoDB for Developers – Engineering Digest",
+                  "Full Stack JavaScript Bootcamp — Professional Certification",
                 ].map((cert) => (
                   <li key={cert} className="flex items-center gap-2">
                     <span className="text-primary/50 shrink-0">→</span>
@@ -138,6 +146,12 @@ export default function AboutSection() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-3">
+                <h3 className="font-mono text-xs text-muted-foreground uppercase tracking-widest mb-2">
+                  // languages
+                </h3>
+                <p className="text-sm text-muted-foreground">English, Malayalam, Tamil, Hindi</p>
+              </div>
             </div>
           </div>
         </div>

@@ -4,24 +4,25 @@ import { motion } from "framer-motion";
 
 const learnings = [
   {
-    title: "The N+1 Query That Slowed Everything Down",
+    title: "The N+1 Query That Killed a Sync Pipeline",
     description:
-      "Shipped a GraphQL resolver that looked clean but made a separate MongoDB query per item in a list. 200ms for 10 items, 4 seconds for 200. I didn't catch it because I tested with small datasets.",
-    takeaway: "Now I always profile with realistic data volumes, and I use DataLoader for batching.",
+      "A cron-based OTA sync job was firing 401 MongoDB queries per cycle. It worked fine in development with small datasets — but in production, with growing hotel inventory, it became a bottleneck that blocked scaling to more OTA integrations. I didn't catch it because I never profiled with realistic data volumes.",
+    takeaway:
+      "Profiling with real data collapsed it to 5 queries per cycle (99% reduction) by batching all lookups upfront. Now I always profile background jobs with production-scale data before shipping. Query count is part of the definition of done.",
   },
   {
     title: "The Cron Job That Silently Did Nothing",
     description:
-      "A booking sync job failed mid-run but exited cleanly — zero error, zero records processed. Took 3 days for a customer to notice stale data. The job 'succeeded' because nothing threw.",
+      "A booking sync job failed mid-run but exited cleanly — zero errors thrown, zero records processed, zero alerts fired. It took 3 days for a hotel client to notice stale availability data. The job 'succeeded' because nothing explicitly threw an exception.",
     takeaway:
-      "Every background job now logs: records processed, records failed, and duration. Zero records is an alert, not a success.",
+      "Every background job now logs: records processed, records failed, and total duration. Zero records processed is an alert, not a success. Exit codes and try/catch aren't enough — you have to assert that the job actually did what it was supposed to do.",
   },
   {
     title: "Schema Change Without a Migration Plan",
     description:
-      "Changed a MongoDB document shape in production without thinking about existing documents. Old and new shapes coexisted, and the API returned inconsistent data for a day.",
+      "Changed a MongoDB document shape in production without accounting for the existing documents. Old and new shapes coexisted in the collection, and the API returned inconsistent data for nearly a day before I caught it. There was no rollback path.",
     takeaway:
-      "Now I treat every schema change as a multi-step process: add new field with defaults, backfill, then remove the old one.",
+      "Now I treat every schema change as a multi-step process: add new field with a safe default, backfill existing documents, then remove the old field once the codebase no longer reads it. Never a one-shot swap in production.",
   },
 ];
 
