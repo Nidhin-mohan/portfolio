@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import SectionHead from "@/components/SectionHead";
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -57,34 +58,31 @@ const projects: Project[] = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="w-full py-20 md:py-28 bg-muted/20 relative">
+    <section id="projects" className="relative w-full border-b-2 border-foreground py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        {/* Header */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
-            01 · Projects
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-            What I built
-          </h2>
-          <p className="text-muted-foreground">
+        <div className="mx-auto max-w-6xl">
+          <SectionHead n="01" tag="PROJECTS" meta={`${projects.length} SELECTED`} title="WHAT I BUILT" />
+          <p className="mb-12 max-w-xl text-sm text-muted-foreground">
             Problem, approach, and what was actually hard — not a list of features.
           </p>
-        </div>
 
-        {/* Project Cards */}
-        <div className="max-w-4xl mx-auto space-y-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
-          ))}
-        </div>
+          {/* Project Cards */}
+          <div className="space-y-8">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
+          </div>
 
-        <div className="flex justify-center mt-10">
-          <Button variant="outline" asChild className="rounded-full">
-            <Link href="https://github.com/Nidhin-mohan" target="_blank" rel="noreferrer">
-              More on GitHub <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="mt-10">
+            <Button
+              asChild
+              className="h-auto rounded-none border-2 border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-[0.15em] text-foreground hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link href="https://github.com/Nidhin-mohan" target="_blank" rel="noreferrer">
+                MORE ON GITHUB <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -96,71 +94,76 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <motion.article
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
+      transition={{ duration: 0.45, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
       viewport={{ once: true, margin: "-50px" }}
-      className="rounded-xl border border-border bg-card p-6 md:p-8 hover:border-primary/30 transition-colors duration-300"
+      className="group border-2 border-foreground bg-card transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lime"
     >
-      {/* Card header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-6">
-        <div>
-          <div className="flex items-center gap-3 mb-1.5">
-            <span className="font-mono text-xs text-primary/40 select-none">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span className="font-mono text-xs text-muted-foreground border border-border rounded px-1.5 py-0.5">
+      {/* Card header bar */}
+      <div className="flex items-stretch border-b-2 border-foreground">
+        <span className="flex items-center bg-foreground px-4 font-display text-2xl text-background md:text-3xl">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <div className="flex flex-1 flex-col justify-center gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="border border-border px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
               {project.category}
             </span>
-            <span className={`font-mono text-xs rounded px-1.5 py-0.5 ${
-              project.type === "Professional"
-                ? "bg-primary/10 text-primary/70 border border-primary/20"
-                : "bg-muted text-muted-foreground border border-border"
-            }`}>
+            <span
+              className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                project.type === "Professional"
+                  ? "bg-primary text-primary-foreground"
+                  : "border border-border text-muted-foreground"
+              }`}
+            >
               {project.type}
             </span>
           </div>
-          <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
-          <p className="text-sm text-muted-foreground">{project.subtitle}</p>
-        </div>
-        <div className="flex gap-2 shrink-0">
           {project.repoUrl && (
-            <Button size="sm" variant="outline" asChild className="rounded-full h-8 text-xs">
-              <Link href={project.repoUrl} target="_blank" rel="noreferrer">
-                <GithubIcon className="mr-1.5 h-3 w-3" />
-                Code
-              </Link>
-            </Button>
+            <Link
+              href={project.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground transition-colors hover:text-primary"
+            >
+              <GithubIcon className="h-3.5 w-3.5" />
+              CODE →
+            </Link>
           )}
         </div>
       </div>
 
-      {/* Content sections */}
-      <div className="space-y-4 mb-6">
-        <div>
-          <span className="font-mono text-xs text-primary/50 uppercase tracking-wide">
-            // problem
-          </span>
-          <p className="text-sm text-muted-foreground leading-relaxed mt-1">{project.problem}</p>
-        </div>
-        <div>
-          <span className="font-mono text-xs text-primary/50 uppercase tracking-wide">
-            // what i built
-          </span>
-          <p className="text-sm text-muted-foreground leading-relaxed mt-1">{project.whatIBuilt}</p>
-        </div>
-        <div>
-          <span className="font-mono text-xs text-primary/50 uppercase tracking-wide">
-            // the hard part
-          </span>
-          <p className="text-sm text-muted-foreground leading-relaxed mt-1">{project.hardPart}</p>
-        </div>
+      {/* Title */}
+      <div className="border-b-2 border-foreground px-4 py-5 md:px-6">
+        <h3 className="font-display text-3xl leading-[0.9] text-foreground md:text-5xl">
+          {project.title}
+        </h3>
+        <p className="mt-2 text-sm text-muted-foreground">{project.subtitle}</p>
+      </div>
+
+      {/* Content rows */}
+      <div className="divide-y-2 divide-border">
+        {(
+          [
+            ["PROBLEM", project.problem],
+            ["WHAT I BUILT", project.whatIBuilt],
+            ["THE HARD PART", project.hardPart],
+          ] as const
+        ).map(([label, body]) => (
+          <div key={label} className="grid gap-2 px-4 py-5 md:grid-cols-[160px_1fr] md:gap-6 md:px-6">
+            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">
+              [ {label} ]
+            </span>
+            <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+          </div>
+        ))}
       </div>
 
       {/* Stack */}
-      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border">
+      <div className="flex flex-wrap gap-1.5 border-t-2 border-foreground px-4 py-4 md:px-6">
         {project.stack.map((tech) => (
           <span
             key={tech}
-            className="font-mono text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded"
+            className="border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
           >
             {tech}
           </span>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, FileText, ArrowUpRight } from "lucide-react";
+import SectionHead from "@/components/SectionHead";
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -49,86 +50,88 @@ const contactLinks = [
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="w-full py-20 md:py-28 relative">
-      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-10 pointer-events-none" />
-      <div className="container px-4 md:px-6 relative">
-        <div className="max-w-2xl mx-auto">
-          {/* Header */}
-          <div className="mb-10">
-            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
-              07 · Contact
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-              Let&apos;s talk
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Looking for a backend-heavy full-stack engineer? I&apos;m interested in roles
-              focused on system design, API architecture, and building infrastructure that other
-              developers depend on.
-            </p>
-          </div>
+    <section id="contact" className="relative w-full py-16 md:py-24">
+      <div className="container relative px-4 md:px-6">
+        <div className="mx-auto max-w-6xl">
+          <SectionHead n="07" tag="CONTACT" meta="OPEN TO ROLES" title="LET'S TALK" />
+          <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Looking for a backend-heavy full-stack engineer? I&apos;m interested in roles
+            focused on system design, API architecture, and building infrastructure that other
+            developers depend on.
+          </p>
 
-          {/* Terminal CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            viewport={{ once: true }}
-            className="rounded-lg border border-border bg-muted/40 px-5 py-4 font-mono text-sm mb-10 leading-relaxed"
-          >
-            <div>
-              <span className="text-muted-foreground select-none">$ </span>
-              <span className="text-foreground">contact nidhin</span>
-              <span className="text-primary"> --purpose</span>
-              <span className="text-muted-foreground"> &quot;new opportunity&quot;</span>
-            </div>
-            <div>
-              <span className="text-muted-foreground select-none">&gt; </span>
-              <span className="text-muted-foreground">Opening preferred channel...</span>
-            </div>
-            <div>
-              <span className="text-muted-foreground select-none">&gt; </span>
-              <Link
-                href="mailto:nidhinmohannidhin@gmail.com"
-                className="text-primary hover:underline underline-offset-4"
-              >
-                nidhinmohannidhin@gmail.com
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* Contact links */}
-          <div>
-            {contactLinks.map((link, index) => {
-              const Icon = link.icon;
-              return (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.35, delay: index * 0.07 }}
-                  viewport={{ once: true }}
-                >
+          <div className="grid border-2 border-foreground lg:grid-cols-2">
+            {/* Terminal CTA */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className="border-b-2 border-foreground lg:border-b-0 lg:border-r-2"
+            >
+              <div className="flex items-center justify-between border-b-2 border-foreground bg-foreground px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-background">
+                <span>~/contact — zsh</span>
+                <span className="animate-blink">█</span>
+              </div>
+              <div className="px-5 py-5 text-sm leading-relaxed">
+                <div>
+                  <span className="select-none text-primary">$ </span>
+                  <span className="text-foreground">contact nidhin</span>
+                  <span className="text-primary"> --re</span>
+                  <span className="text-muted-foreground"> &quot;new opportunity&quot;</span>
+                </div>
+                <div className="text-muted-foreground">
+                  <span className="select-none">&gt; </span>opening preferred channel…
+                </div>
+                <div>
+                  <span className="select-none text-muted-foreground">&gt; </span>
                   <Link
-                    href={link.href}
-                    target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                    rel={link.href.startsWith("mailto") ? undefined : "noreferrer"}
-                    className="group flex items-center justify-between py-3.5 border-b border-border hover:border-primary/30 transition-colors"
+                    href="mailto:nidhinmohannidhin@gmail.com"
+                    className="font-bold text-primary underline-offset-4 hover:underline"
                   >
-                    <div className="flex items-center gap-3">
-                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                      <div>
-                        <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                          {link.label}
-                        </div>
-                        <div className="text-xs text-muted-foreground">{link.description}</div>
-                      </div>
-                    </div>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors shrink-0" />
+                    nidhinmohannidhin@gmail.com
                   </Link>
-                </motion.div>
-              );
-            })}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Contact links */}
+            <div>
+              {contactLinks.map((link, index) => {
+                const Icon = link.icon;
+                return (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    viewport={{ once: true }}
+                  >
+                    <Link
+                      href={link.href}
+                      target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                      rel={link.href.startsWith("mailto") ? undefined : "noreferrer"}
+                      className={`group flex items-center justify-between gap-3 px-4 py-4 transition-colors hover:bg-primary ${
+                        index !== contactLinks.length - 1 ? "border-b-2 border-foreground" : ""
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className="h-4 w-4 shrink-0 text-foreground transition-colors group-hover:text-primary-foreground" />
+                        <div>
+                          <div className="text-sm font-bold text-foreground transition-colors group-hover:text-primary-foreground">
+                            {link.label}
+                          </div>
+                          <div className="text-xs text-muted-foreground group-hover:text-primary-foreground/80">
+                            {link.description}
+                          </div>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary-foreground" />
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

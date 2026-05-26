@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHead from "@/components/SectionHead";
 
 const principles = [
   {
@@ -27,44 +28,42 @@ const principles = [
 
 export default function EngineeringPrinciples() {
   return (
-    <section id="principles" className="w-full py-20 md:py-28 relative">
+    <section id="principles" className="relative w-full border-b-2 border-foreground py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-12">
-            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
-              05 · Principles
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-              How I work
-            </h2>
-            <p className="text-muted-foreground max-w-lg">
-              A few principles that guide how I write code and make technical decisions.
-            </p>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <SectionHead n="05" tag="PRINCIPLES" meta="HOW I DECIDE" title="HOW I WORK" />
+          <p className="mb-12 max-w-lg text-sm text-muted-foreground">
+            A few principles that guide how I write code and make technical decisions.
+          </p>
 
-          {/* Principles list */}
-          <div className="divide-y divide-border">
-            {principles.map((principle, index) => (
-              <motion.div
-                key={principle.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                viewport={{ once: true }}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-8 py-7"
-              >
-                <span className="font-mono text-3xl font-bold text-primary/15 shrink-0 sm:w-14 sm:text-right leading-none select-none">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">{principle.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+          {/* Principles grid */}
+          <div className="grid border-2 border-foreground sm:grid-cols-2">
+            {principles.map((principle, index) => {
+              const col = index % 2;
+              const lastRow = index >= principles.length - (principles.length % 2 === 0 ? 2 : 1);
+              return (
+                <motion.div
+                  key={principle.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true }}
+                  className={`group bg-card p-6 transition-colors hover:bg-primary md:p-8 ${
+                    col === 0 ? "sm:border-r-2 sm:border-foreground" : ""
+                  } ${!lastRow ? "border-b-2 border-foreground" : ""}`}
+                >
+                  <span className="block select-none font-display text-6xl leading-none text-primary transition-colors group-hover:text-primary-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-4 text-sm font-bold uppercase tracking-[0.08em] text-foreground group-hover:text-primary-foreground">
+                    {principle.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground group-hover:text-primary-foreground/90">
                     {principle.description}
                   </p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

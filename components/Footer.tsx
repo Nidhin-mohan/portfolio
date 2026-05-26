@@ -21,38 +21,55 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t border-border py-6 bg-background">
-      <div className="container flex flex-col items-center justify-between gap-4 md:flex-row md:h-14">
-        <p className="font-mono text-xs text-muted-foreground/50">
-          <span className="text-primary/40">~/</span>nidhin.dev · built with Next.js, TypeScript &
-          Tailwind
-        </p>
-        <div className="flex items-center gap-1">
-          <Link
-            href="https://github.com/Nidhin-mohan"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          >
-            <GithubIcon className="h-4 w-4" />
-            <span className="sr-only">GitHub</span>
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/nidhinm/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          >
-            <LinkedinIcon className="h-4 w-4" />
-            <span className="sr-only">LinkedIn</span>
-          </Link>
-          <Link
-            href="mailto:nidhinmohannidhin@gmail.com"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          >
-            <Mail className="h-4 w-4" />
-            <span className="sr-only">Email</span>
-          </Link>
+    <footer className="relative w-full border-t-2 border-foreground bg-background">
+      <div className="container px-4 py-12 md:px-6 md:py-16">
+        <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
+          <div>
+            <p className="font-display text-5xl leading-[0.86] text-foreground md:text-7xl">
+              LET&apos;S BUILD
+              <br />
+              SOMETHING<span className="text-primary">.</span>
+            </p>
+            <Link
+              href="mailto:nidhinmohannidhin@gmail.com"
+              className="mt-6 inline-block bg-primary px-4 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              nidhinmohannidhin@gmail.com →
+            </Link>
+          </div>
+
+          <div className="flex items-center">
+            <Link
+              href="https://github.com/Nidhin-mohan"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-11 w-11 items-center justify-center border-2 border-foreground text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              <GithubIcon className="h-4 w-4" />
+              <span className="sr-only">GitHub</span>
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/nidhinm/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-11 w-11 items-center justify-center border-2 border-l-0 border-foreground text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              <LinkedinIcon className="h-4 w-4" />
+              <span className="sr-only">LinkedIn</span>
+            </Link>
+            <Link
+              href="mailto:nidhinmohannidhin@gmail.com"
+              className="inline-flex h-11 w-11 items-center justify-center border-2 border-l-0 border-foreground text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              <Mail className="h-4 w-4" />
+              <span className="sr-only">Email</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t-2 border-foreground pt-5 text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:flex-row sm:items-center">
+          <span>© {new Date().getFullYear()} NIDHIN_M // KOCHI, IN</span>
+          <span>BUILT WITH NEXT.JS · TYPESCRIPT · TAILWIND</span>
         </div>
       </div>
     </footer>

@@ -31,49 +31,56 @@ const navItems = [
 
 const Navbar = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <div className="container flex h-14 items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-1">
-          <span className="font-mono text-sm text-primary select-none">~/</span>
-          <span className="font-bold text-sm tracking-tight">nidhin.dev</span>
+    <header className="fixed inset-x-0 top-0 z-50 border-b-2 border-foreground bg-background/90 backdrop-blur-md">
+      <div className="container flex h-12 items-center justify-between px-4 md:px-6">
+        {/* Monogram */}
+        <Link href="/" className="group flex items-center gap-0">
+          <span className="flex h-7 w-7 items-center justify-center bg-primary text-[12px] font-bold leading-none text-primary-foreground">
+            NM
+          </span>
+          <span className="ml-2.5 text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+            NIDHIN<span className="text-muted-foreground">.DEV</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6">
-          {navItems.map((item) => (
+        <nav className="hidden items-center lg:flex">
+          {navItems.map((item, i) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="group flex items-center gap-1.5 border-l border-border px-4 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
             >
+              <span className="text-primary transition-colors group-hover:text-primary-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               {item.name}
             </Link>
           ))}
         </nav>
 
         {/* Right Side */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <div className="hidden md:flex items-center">
-            <Link
-              href="https://github.com/Nidhin-mohan"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
-              <GithubIcon className="h-4 w-4" />
-              <span className="sr-only">GitHub</span>
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/nidhinm/"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
-              <LinkedinIcon className="h-4 w-4" />
-              <span className="sr-only">LinkedIn</span>
-            </Link>
+        <div className="flex items-center">
+          <Link
+            href="https://github.com/Nidhin-mohan"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden h-8 w-8 items-center justify-center border-l border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground md:inline-flex"
+          >
+            <GithubIcon className="h-4 w-4" />
+            <span className="sr-only">GitHub</span>
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/nidhinm/"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden h-8 w-8 items-center justify-center border-l border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground md:inline-flex"
+          >
+            <LinkedinIcon className="h-4 w-4" />
+            <span className="sr-only">LinkedIn</span>
+          </Link>
+          <div className="border-l border-border">
+            <ThemeToggle />
           </div>
           <MobileNav />
         </div>

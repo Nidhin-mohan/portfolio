@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHead from "@/components/SectionHead";
 
 const learnings = [
   {
@@ -28,45 +29,52 @@ const learnings = [
 
 export default function SystemDesignSection() {
   return (
-    <section id="system-design" className="w-full py-20 md:py-28 bg-muted/20 relative">
+    <section id="system-design" className="relative w-full border-b-2 border-foreground py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-12">
-            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
-              06 · Lessons
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-              Lessons learned
-            </h2>
-            <p className="text-muted-foreground">
-              Mistakes I&apos;ve made in production and what I do differently now.
-            </p>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <SectionHead n="06" tag="LESSONS" meta="POSTMORTEMS" title="LESSONS FROM PROD" />
+          <p className="mb-12 max-w-xl text-sm text-muted-foreground">
+            Mistakes I&apos;ve made in production and what I do differently now.
+          </p>
 
           {/* Learnings */}
-          <div className="space-y-5">
+          <div className="space-y-8">
             {learnings.map((item, index) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
+                transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true }}
-                className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-colors"
+                className="border-2 border-foreground bg-card"
               >
-                <div className="flex items-start gap-3 mb-3">
-                  <span className="font-mono text-xs text-primary/40 shrink-0 pt-0.5 select-none">
-                    {String(index + 1).padStart(2, "0")}
+                {/* incident header */}
+                <div className="flex items-stretch border-b-2 border-foreground">
+                  <span className="flex items-center bg-destructive px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-destructive-foreground">
+                    INC-{String(index + 1).padStart(2, "0")}
                   </span>
-                  <h4 className="font-semibold text-foreground">{item.title}</h4>
+                  <h4 className="flex items-center px-4 py-2 text-sm font-bold uppercase tracking-[0.05em] text-foreground">
+                    {item.title}
+                  </h4>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4 pl-6">
-                  {item.description}
-                </p>
-                <div className="flex gap-2 pl-6 pt-3 border-t border-border">
-                  <span className="text-primary/60 text-sm shrink-0 mt-0.5">→</span>
-                  <p className="text-sm text-primary/80">{item.takeaway}</p>
+
+                <div className="grid lg:grid-cols-2">
+                  {/* Incident */}
+                  <div className="border-b-2 border-foreground p-5 lg:border-b-0 lg:border-r-2 lg:p-6">
+                    <span className="mb-2 block text-[11px] font-bold uppercase tracking-[0.16em] text-destructive">
+                      [ WHAT HAPPENED ]
+                    </span>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
+                  {/* Fix */}
+                  <div className="p-5 lg:p-6">
+                    <span className="mb-2 block text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
+                      [ WHAT I CHANGED ]
+                    </span>
+                    <p className="text-sm leading-relaxed text-foreground/90">{item.takeaway}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}

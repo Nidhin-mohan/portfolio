@@ -2,259 +2,160 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
 
-type Token = { t: string; c?: string };
+const readout: { k: string; v: string; note?: string; signal?: boolean }[] = [
+  { k: "QUERIES/CYCLE", v: "401 → 5", note: "−99%" },
+  { k: "OTA API TRAFFIC", v: "BULK", note: "−96%" },
+  { k: "EXPERIENCE", v: "3 YRS" },
+  { k: "STACK", v: "NODE·TS·MONGO" },
+  { k: "LOCATION", v: "KOCHI, IN" },
+  { k: "STATUS", v: "AVAILABLE", signal: true },
+];
 
-const CODE: Token[][] = [
-  [{ t: "// nidhin.config.ts", c: "#6b7280" }],
-  [],
-  [
-    { t: "const", c: "#c084fc" },
-    { t: " developer = {" },
-  ],
-  [
-    { t: "  name" },
-    { t: ": ", c: "#9ca3af" },
-    { t: '"Nidhin M"', c: "#86efac" },
-    { t: "," },
-  ],
-  [
-    { t: "  role" },
-    { t: ": ", c: "#9ca3af" },
-    { t: '"Software Engineer"', c: "#86efac" },
-    { t: "," },
-  ],
-  [
-    { t: "  focus" },
-    { t: ": ", c: "#9ca3af" },
-    { t: '"Full-stack, backend-first"', c: "#86efac" },
-    { t: "," },
-  ],
-  [
-    { t: "  available" },
-    { t: ": ", c: "#9ca3af" },
-    { t: "true", c: "#c084fc" },
-    { t: "," },
-  ],
-  [
-    { t: "  openTo" },
-    { t: ": ", c: "#9ca3af" },
-    { t: "[" },
-  ],
-  [{ t: '    "Full-time roles"', c: "#86efac" }, { t: "," }],
-  [{ t: '    "Remote or on-site"', c: "#86efac" }, { t: "," }],
-  [{ t: "  ]," }],
-  [
-    { t: "  strengths" },
-    { t: ": ", c: "#9ca3af" },
-    { t: "[" },
-  ],
-  [{ t: '    "Scalable architecture"', c: "#86efac" }, { t: "," }],
-  [{ t: '    "Maintainable code"', c: "#86efac" }, { t: "," }],
-  [{ t: '    "Multi-tenant SaaS"', c: "#86efac" }, { t: "," }],
-  [{ t: '    "API & integration design"', c: "#86efac" }, { t: "," }],
-  [{ t: "  ]," }],
-  [
-    { t: "  location" },
-    { t: ": ", c: "#9ca3af" },
-    { t: '"Kochi, India"', c: "#86efac" },
-    { t: "," },
-  ],
-  [{ t: "};" }],
+const ticker = [
+  "NODE.JS", "TYPESCRIPT", "GRAPHQL", "MONGODB", "REDIS", "BULLMQ",
+  "DOCKER", "AWS", "NEXT.JS", "REACT", "POSTGRES", "CI/CD",
 ];
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-[92vh] flex items-center overflow-hidden"
-    >
-      {/* Background */}
-      <div className="absolute inset-0 bg-grid-small-primary/5 opacity-20 pointer-events-none" />
-      <div className="pointer-events-none absolute -top-32 -left-32 h-[600px] w-[600px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
-
-      <div className="container relative z-10 px-4 md:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* Left: text content */}
-          <motion.div variants={container} initial="hidden" animate="show">
-            {/* Status indicator */}
-            <motion.div variants={item} className="mb-8">
-              <span className="inline-flex items-center gap-2 font-mono text-xs text-primary border border-primary/20 bg-primary/5 rounded-full px-3 py-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                available · open to full-time roles
-              </span>
-            </motion.div>
-
-            {/* Heading */}
-            <motion.h1
-              variants={item}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6"
-            >
-              <span className="text-foreground">Full-stack dev,</span>
-              <br />
-              <span className="bg-gradient-to-r from-primary via-primary/90 to-primary/50 bg-clip-text text-transparent">
-                backend-focused.
-              </span>
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              variants={item}
-              className="text-muted-foreground text-lg leading-relaxed max-w-xl mb-8"
-            >
-              3 years in B2B SaaS — multi-tenant and single-tenant systems, property management platforms, and scalable integrations. I design and build systems that handle real operational load:{" "}
-              <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
-                Node.js
-              </code>
-              ,{" "}
-              <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
-                TypeScript
-              </code>
-              ,{" "}
-              <code className="font-mono text-sm bg-muted px-1.5 py-0.5 rounded text-foreground">
-                MongoDB
-              </code>
-              {" "}— optimising for scale, not just shipping features.
-            </motion.p>
-
-            {/* Terminal block */}
-            <motion.div variants={item} className="mb-10">
-              <div className="inline-block rounded-lg border border-border bg-muted/40 px-5 py-3.5 font-mono text-sm leading-relaxed">
-                <div>
-                  <span className="text-muted-foreground select-none">$ </span>
-                  <span className="text-foreground">whoami</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground select-none">&gt; </span>
-                  <span className="text-primary">nidhin</span>
-                  <span className="text-muted-foreground">
-                    {" "}· software engineer · backend focus · Kochi, India
-                  </span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground select-none">&gt; </span>
-                  <span className="text-muted-foreground">
-                    Node.js · TypeScript · React · MongoDB · Redis · BullMQ
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* CTAs */}
-            <motion.div variants={item} className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="rounded-full">
-                <Link href="/#projects">
-                  View my work <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="rounded-full border-border hover:border-primary/50"
-              >
-                <Link href="/#contact">Get in touch</Link>
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Right: animated code window */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-            className="hidden lg:flex items-center justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
-            >
-              {/* Code window */}
-              <div className="rounded-xl border border-white/10 bg-[#0d1117] shadow-2xl overflow-hidden w-[420px]">
-                {/* Title bar */}
-                <div className="flex items-center gap-1.5 px-4 py-3 bg-white/5 border-b border-white/10">
-                  <div className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-                  <div className="h-3 w-3 rounded-full bg-[#febc2e]" />
-                  <div className="h-3 w-3 rounded-full bg-[#28c840]" />
-                  <span className="ml-3 font-mono text-xs text-[#6b7280]">
-                    nidhin.config.ts
-                  </span>
-                </div>
-                {/* Code lines */}
-                <div className="p-5 font-mono text-[13px] leading-6">
-                  {CODE.map((line, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 1.0 + i * 0.07, duration: 0.25 }}
-                      className="whitespace-pre"
-                    >
-                      {line.length === 0
-                        ? " "
-                        : line.map((tok, j) => (
-                            <span key={j} style={{ color: tok.c ?? "#9ca3af" }}>
-                              {tok.t}
-                            </span>
-                          ))}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Ambient glow behind the window */}
-              <div className="absolute -inset-8 bg-primary/8 blur-3xl rounded-full -z-10" />
-
-              {/* Floating badge — top right */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2.2, duration: 0.4 }}
-                className="absolute -top-4 -right-6 bg-background border border-border rounded-lg px-3 py-1.5 text-xs font-mono shadow-lg"
-              >
-                <span className="text-[#28c840]">✓</span>{" "}
-                <span className="text-muted-foreground">available: true</span>
-              </motion.div>
-
-              {/* Floating badge — bottom left */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2.5, duration: 0.4 }}
-                className="absolute -bottom-4 -left-6 bg-background border border-border rounded-lg px-3 py-1.5 text-xs font-mono shadow-lg"
-              >
-                <span className="text-primary">→</span>{" "}
-                <span className="text-muted-foreground">open to full-time</span>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
+    <section id="hero" className="relative border-b-2 border-foreground">
+      {/* Masthead strip */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="border-b border-border"
+      >
+        <div className="container flex items-center justify-between px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground md:px-6">
+          <span className="text-foreground">[ NIDHIN_M ]</span>
+          <span className="hidden sm:inline">SOFTWARE_ENGINEER // BACKEND·FULLSTACK</span>
+          <span className="inline-flex items-center gap-2 text-primary">
+            <span className="h-2 w-2 animate-flicker bg-primary" />
+            ONLINE
+          </span>
         </div>
+      </motion.div>
+
+      <div className="container px-4 py-14 md:px-6 md:py-20">
+        <motion.div variants={container} initial="hidden" animate="show">
+          {/* eyebrow */}
+          <motion.p
+            variants={item}
+            className="mb-6 text-xs font-medium uppercase tracking-[0.25em] text-primary"
+          >
+            // BACKEND &amp; DISTRIBUTED SYSTEMS — EST. 2023
+          </motion.p>
+
+          {/* Massive headline */}
+          <motion.h1
+            variants={item}
+            className="font-display text-foreground"
+          >
+            <span className="block text-[clamp(3rem,13vw,11rem)]">BACKEND</span>
+            <span className="block text-[clamp(3rem,13vw,11rem)]">
+              SYSTEMS{" "}
+              <span
+                className="glitch bg-primary px-2 text-primary-foreground"
+                data-text="THAT"
+              >
+                THAT
+              </span>
+            </span>
+            <span className="block text-[clamp(3rem,13vw,11rem)] text-muted-foreground">
+              HOLD UNDER LOAD
+            </span>
+          </motion.h1>
+
+          {/* lower band */}
+          <div className="mt-12 grid gap-0 border-2 border-foreground md:mt-16 lg:grid-cols-12">
+            {/* Left: pitch */}
+            <motion.div
+              variants={item}
+              className="border-b-2 border-foreground p-6 md:p-8 lg:col-span-7 lg:border-b-0 lg:border-r-2"
+            >
+              <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
+                3 years building B2B SaaS — multi-tenant property management
+                platforms, OTA sync pipelines, billing engines. I design for the
+                moment the data gets large and the edge cases get real, not just the
+                happy path in dev.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-0 sm:flex-row">
+                <Link
+                  href="/#projects"
+                  className="group inline-flex items-center justify-center gap-2 bg-primary px-6 py-4 text-xs font-bold uppercase tracking-[0.15em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+                >
+                  VIEW THE WORK
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center justify-center border-2 border-foreground px-6 py-4 text-xs font-bold uppercase tracking-[0.15em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:border-l-0"
+                >
+                  GET IN TOUCH
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right: data readout */}
+            <motion.div variants={item} className="lg:col-span-5">
+              <div className="flex items-center justify-between border-b-2 border-foreground bg-foreground px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-background">
+                <span>SYSTEM_STATUS.LOG</span>
+                <span className="animate-blink">█</span>
+              </div>
+              <dl className="text-xs">
+                {readout.map((row, i) => (
+                  <div
+                    key={row.k}
+                    className={`flex items-center justify-between gap-4 px-4 py-[0.6rem] ${
+                      i !== readout.length - 1 ? "border-b border-border" : ""
+                    }`}
+                  >
+                    <dt className="text-muted-foreground">{row.k}</dt>
+                    <dd className="flex items-center gap-2 text-foreground">
+                      {row.signal && <span className="h-2 w-2 animate-flicker bg-primary" />}
+                      <span className="font-medium">{row.v}</span>
+                      {row.note && (
+                        <span className="bg-primary px-1 font-bold text-primary-foreground">
+                          {row.note}
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
-        <Link
-          href="/#projects"
-          className="text-muted-foreground/40 hover:text-muted-foreground transition-colors"
-        >
-          <ChevronDown className="h-6 w-6" />
-        </Link>
+      {/* Stack ticker — lime bar */}
+      <div className="overflow-hidden border-t-2 border-foreground bg-primary py-2">
+        <div className="flex w-max animate-marquee pause-on-hover">
+          {[...ticker, ...ticker].map((t, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-6 px-6 text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground"
+            >
+              {t}
+              <span aria-hidden>◆</span>
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

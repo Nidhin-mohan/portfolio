@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHead from "@/components/SectionHead";
 
 interface Experience {
   role: string;
@@ -45,70 +46,65 @@ const experiences: Experience[] = [
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="w-full py-20 md:py-28 relative">
+    <section id="experience" className="relative w-full border-b-2 border-foreground py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-12">
-            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
-              02 · Experience
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-              What I&apos;ve shipped
-            </h2>
-            <p className="text-muted-foreground">
-              Impact and outcomes — not just job descriptions.
-            </p>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <SectionHead n="02" tag="EXPERIENCE" meta="2023 — PRESENT" title="WHAT I'VE SHIPPED" />
+          <p className="mb-12 max-w-xl text-sm text-muted-foreground">
+            Impact and outcomes — not just job descriptions.
+          </p>
 
           {/* Timeline */}
-          <div className="space-y-10">
+          <div className="space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.role + exp.company}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: index * 0.1 }}
+                transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true }}
-                className="relative pl-6 border-l border-border"
+                className="border-2 border-foreground bg-card"
               >
-                {/* Timeline dot */}
-                <div className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-primary bg-background" />
-
-                {/* Role + company */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-0.5">
-                    <h3 className="text-lg font-semibold text-foreground">{exp.role}</h3>
-                    <span className="font-mono text-xs border border-border rounded px-1.5 py-0.5 text-muted-foreground">
+                {/* header bar */}
+                <div className="flex flex-col border-b-2 border-foreground sm:flex-row sm:items-stretch">
+                  <span className="flex items-center bg-foreground px-4 py-3 text-xs font-bold uppercase tracking-[0.16em] text-background">
+                    {exp.period}
+                  </span>
+                  <div className="flex flex-1 items-center justify-between gap-3 px-4 py-3">
+                    <h3 className="font-display text-2xl leading-none text-foreground md:text-3xl">
+                      {exp.role}
+                    </h3>
+                    <span className="hidden shrink-0 border border-border px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:inline">
                       {exp.type}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{exp.company}</span>
-                    <span className="text-border">·</span>
-                    <span className="font-mono text-xs">{exp.period}</span>
-                  </div>
                 </div>
 
-                {/* Bullets */}
-                <ul className="space-y-2.5 mb-5">
+                <p className="border-b-2 border-border px-4 py-2.5 text-sm text-muted-foreground">
+                  → {exp.company}
+                </p>
+
+                {/* bullets */}
+                <ul className="divide-y divide-border">
                   {exp.bullets.map((point, i) => (
                     <li
                       key={i}
-                      className="flex gap-3 text-sm text-muted-foreground leading-relaxed"
+                      className="flex gap-3 px-4 py-3 text-sm leading-relaxed text-muted-foreground"
                     >
-                      <span className="text-primary/50 select-none mt-0.5 shrink-0">→</span>
+                      <span className="shrink-0 select-none font-bold text-primary">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                       <span>{point}</span>
                     </li>
                   ))}
                 </ul>
 
-                {/* Stack */}
-                <div className="flex flex-wrap gap-1.5">
+                {/* stack */}
+                <div className="flex flex-wrap gap-1.5 border-t-2 border-foreground px-4 py-4">
                   {exp.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="font-mono text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded"
+                      className="border border-border px-2 py-0.5 text-[11px] text-muted-foreground"
                     >
                       {tech}
                     </span>

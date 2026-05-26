@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { ComponentType } from "react";
 import { Server, Database, Cloud, Code, Wrench, Layout } from "lucide-react";
+import SectionHead from "@/components/SectionHead";
 
 interface SkillCategory {
   title: string;
@@ -99,24 +100,16 @@ const skillCategories: SkillCategory[] = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="w-full py-20 md:py-28 bg-muted/20 relative">
+    <section id="skills" className="relative w-full border-b-2 border-foreground py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-12">
-            <p className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-3">
-              04 · Skills
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-              Expertise
-            </h2>
-            <p className="text-muted-foreground">
-              Organized by domain — not a flat list of logos.
-            </p>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <SectionHead n="04" tag="SKILLS" meta={`${skillCategories.length} DOMAINS`} title="THE TOOLKIT" />
+          <p className="mb-12 max-w-xl text-sm text-muted-foreground">
+            Organized by domain — not a flat wall of logos.
+          </p>
 
           {/* Skills rows */}
-          <div className="divide-y divide-border">
+          <div className="border-2 border-foreground">
             {skillCategories.map((category, index) => {
               const Icon = category.icon;
               return (
@@ -124,21 +117,26 @@ export default function SkillsSection() {
                   key={category.title}
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: index * 0.06 }}
+                  transition={{ duration: 0.4, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
                   viewport={{ once: true, margin: "-50px" }}
-                  className="flex flex-col sm:flex-row gap-4 py-5"
+                  className={`flex flex-col sm:flex-row ${
+                    index !== skillCategories.length - 1 ? "border-b-2 border-foreground" : ""
+                  }`}
                 >
-                  <div className="flex items-center gap-2 sm:w-44 shrink-0">
-                    <Icon className="h-3.5 w-3.5 text-primary/60 shrink-0" />
-                    <span className="font-mono text-xs text-muted-foreground uppercase tracking-wide">
+                  <div className="flex shrink-0 items-center gap-2.5 border-b-2 border-foreground bg-muted px-4 py-3 sm:w-60 sm:border-b-0 sm:border-r-2">
+                    <span className="font-display text-xl leading-none text-primary">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <Icon className="h-4 w-4 shrink-0 text-foreground" />
+                    <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-foreground">
                       {category.title}
                     </span>
                   </div>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-1 flex-wrap content-center gap-1.5 px-4 py-3">
                     {category.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="font-mono text-xs bg-background border border-border text-muted-foreground px-2.5 py-1 rounded hover:border-primary/40 hover:text-foreground transition-colors cursor-default"
+                        className="cursor-default border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:border-foreground hover:bg-primary hover:text-primary-foreground"
                       >
                         {skill}
                       </span>

@@ -1,12 +1,25 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "@/app/globals.css"
-import { Inter, JetBrains_Mono } from "next/font/google"
+import { Anton, Martian_Mono } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" })
+// Display: ultra-bold condensed impact face — poster/brutalist headlines
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+  display: "swap",
+})
+
+// Everything else: a squared, technical monospace
+const martianMono = Martian_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-mono",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Nidhin Mohan | Full-Stack Developer — Backend Systems & APIs",
@@ -59,7 +72,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className={cn(inter.variable, jetbrainsMono.variable, "font-sans antialiased")}>
+      <body
+        suppressHydrationWarning
+        className={cn(anton.variable, martianMono.variable, "font-mono antialiased")}
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>

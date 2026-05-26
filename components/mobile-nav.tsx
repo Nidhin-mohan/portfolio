@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, Github, Linkedin } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 
 const menuItems = [
@@ -52,15 +51,14 @@ export function MobileNav() {
 
   return (
     <div className="lg:hidden">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="h-9 w-9 rounded-full"
+      <button
+        type="button"
+        className="inline-flex h-8 w-8 items-center justify-center border-l border-border text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
         onClick={toggleMenu}
         aria-label="Toggle menu"
       >
         <Menu className="h-5 w-5" />
-      </Button>
+      </button>
 
       <AnimatePresence>
         {isOpen && (
@@ -69,36 +67,39 @@ export function MobileNav() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-[60] bg-black/60"
+            className="fixed inset-0 z-[60] bg-background/80 backdrop-blur-sm"
             onClick={closeMenu}
           >
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.3 }}
-              className="absolute right-0 top-0 h-full w-[80%] sm:w-[60%] bg-background text-foreground shadow-xl p-6 flex flex-col"
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute right-0 top-0 flex h-full w-[86%] flex-col border-l-2 border-foreground bg-background p-6 sm:w-[55%]"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <Link href="/" onClick={closeMenu}>
-                  <span className="font-bold text-2xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                    Nidhin.dev
+              <div className="mb-10 flex items-center justify-between border-b-2 border-foreground pb-4">
+                <Link href="/" onClick={closeMenu} className="flex items-center">
+                  <span className="flex h-7 w-7 items-center justify-center bg-primary text-[12px] font-bold leading-none text-primary-foreground">
+                    NM
+                  </span>
+                  <span className="ml-2.5 text-xs font-bold uppercase tracking-[0.18em]">
+                    NIDHIN<span className="text-muted-foreground">.DEV</span>
                   </span>
                 </Link>
-                <Button
-                  variant="ghost"
-                  size="icon"
+                <button
+                  type="button"
                   onClick={toggleMenu}
                   aria-label="Close menu"
+                  className="inline-flex h-8 w-8 items-center justify-center border border-foreground text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                 >
-                  <X className="h-6 w-6" />
-                </Button>
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
               {/* Navigation Items */}
-              <nav className="flex flex-col gap-5 mt-4">
+              <nav className="flex flex-col border-t-2 border-foreground">
                 {menuItems.map((item, i) => (
                   <motion.div
                     key={item.name}
@@ -110,8 +111,11 @@ export function MobileNav() {
                     <Link
                       href={item.href}
                       onClick={closeMenu}
-                      className="text-lg font-medium hover:text-primary transition-colors"
+                      className="group flex items-center gap-3 border-b-2 border-foreground py-4 font-display text-3xl text-foreground transition-colors hover:bg-primary hover:text-primary-foreground hover:pl-3"
                     >
+                      <span className="text-sm text-primary group-hover:text-primary-foreground">
+                        [{String(i + 1).padStart(2, "0")}]
+                      </span>
                       {item.name}
                     </Link>
                   </motion.div>
@@ -119,15 +123,15 @@ export function MobileNav() {
               </nav>
 
               {/* Footer Links */}
-              <div className="mt-auto pt-12 flex justify-center gap-6">
+              <div className="mt-auto flex gap-0 pt-12">
                 <Link
                   href="https://github.com/Nidhin-mohan"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-primary transition-colors"
+                  className="inline-flex h-10 w-10 items-center justify-center border-2 border-foreground text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                   onClick={closeMenu}
                 >
-                  <Github className="h-6 w-6" />
+                  <Github className="h-4 w-4" />
                   <span className="sr-only">GitHub</span>
                 </Link>
 
@@ -135,10 +139,10 @@ export function MobileNav() {
                   href="https://www.linkedin.com/in/nidhinm/"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-primary transition-colors"
+                  className="inline-flex h-10 w-10 items-center justify-center border-2 border-l-0 border-foreground text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
                   onClick={closeMenu}
                 >
-                  <Linkedin className="h-6 w-6" />
+                  <Linkedin className="h-4 w-4" />
                   <span className="sr-only">LinkedIn</span>
                 </Link>
               </div>
