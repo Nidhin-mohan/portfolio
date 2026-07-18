@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import "@/app/globals.css"
 import { Anton, Martian_Mono } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import { MotionProvider } from "@/components/motion-provider"
 import { cn } from "@/lib/utils"
 
 // Display: ultra-bold condensed impact face — poster/brutalist headlines
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     title: "Nidhin Mohan | Full-Stack Developer",
     description:
       "Full-stack developer with a backend focus. Building reliable APIs and systems with TypeScript, Node.js, and MongoDB.",
-    url: "https://nidhin.dev",
+    url: "https://nidhinm.vercel.app",
     siteName: "Nidhin Mohan — Portfolio",
     locale: "en_US",
     type: "website",
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nidhin Mohan | Full-Stack Engineer",
     description:
-      "Building backend systems that scale. TypeScript-first MERN engineer focused on architecture, performance, and reliability.",
+      "Full-stack developer with a backend focus. 3+ years of production MERN with TypeScript, MongoDB, and GraphQL.",
   },
   robots: {
     index: true,
@@ -77,7 +78,7 @@ export default function RootLayout({
         className={cn(anton.variable, martianMono.variable, "font-mono antialiased")}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
+          <MotionProvider>{children}</MotionProvider>
         </ThemeProvider>
       </body>
     </html>

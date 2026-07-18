@@ -26,7 +26,7 @@ const contactLinks = [
     icon: Mail,
     label: "nidhinmohannidhin@gmail.com",
     href: "mailto:nidhinmohannidhin@gmail.com",
-    description: "Best for opportunities & collaboration",
+    description: "Fastest way to reach me",
   },
   {
     icon: GithubIcon,
@@ -42,9 +42,9 @@ const contactLinks = [
   },
   {
     icon: FileText,
-    label: "hashnode.com/@nidhinmohan",
-    href: "https://hashnode.com/@nidhinmohan",
-    description: "Writing on MongoDB, GraphQL & backend patterns",
+    label: "nidhinm.vercel.app/writing",
+    href: "/writing",
+    description: "Postmortems & backend patterns, written down",
   },
 ];
 
@@ -53,11 +53,10 @@ export default function ContactSection() {
     <section id="contact" className="relative w-full py-16 md:py-24">
       <div className="container relative px-4 md:px-6">
         <div className="mx-auto max-w-6xl">
-          <SectionHead n="07" tag="CONTACT" meta="OPEN TO ROLES" title="LET'S TALK" />
+          <SectionHead n="07" tag="CONTACT" meta="INBOX: OPEN" title="LET'S TALK" />
           <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Looking for a backend-heavy full-stack engineer? I&apos;m interested in roles
-            focused on system design, API architecture, and building infrastructure that other
-            developers depend on.
+            If you have a question about anything on this page, or a backend problem you want
+            another pair of eyes on, email me. I read everything that isn&apos;t spam.
           </p>
 
           <div className="grid border-2 border-foreground lg:grid-cols-2">
@@ -109,8 +108,8 @@ export default function ContactSection() {
                   >
                     <Link
                       href={link.href}
-                      target={link.href.startsWith("mailto") ? undefined : "_blank"}
-                      rel={link.href.startsWith("mailto") ? undefined : "noreferrer"}
+                      target={link.href.startsWith("https") ? "_blank" : undefined}
+                      rel={link.href.startsWith("https") ? "noreferrer" : undefined}
                       className={`group flex items-center justify-between gap-3 px-4 py-4 transition-colors hover:bg-primary ${
                         index !== contactLinks.length - 1 ? "border-b-2 border-foreground" : ""
                       }`}

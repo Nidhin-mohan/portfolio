@@ -16,128 +16,127 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
 
-const readout: { k: string; v: string; note?: string; signal?: boolean }[] = [
-  { k: "QUERIES/CYCLE", v: "401 → 5", note: "−99%" },
-  { k: "OTA API TRAFFIC", v: "BULK", note: "−96%" },
-  { k: "EXPERIENCE", v: "3 YRS" },
-  { k: "STACK", v: "NODE·TS·MONGO" },
-  { k: "LOCATION", v: "KOCHI, IN" },
-  { k: "STATUS", v: "AVAILABLE", signal: true },
+// Worklog: dated years deliberately stripped (discretion — see linkdn workspace).
+const worklog: { tag: string; text: string; note?: string; promoted?: boolean; now?: boolean }[] = [
+  { tag: "LOG", text: "CRON OTA SYNC — 401 → 5 DB READS", note: "−99%", promoted: true },
+  { tag: "LOG", text: "60-DAY BULK SYNC — 60 → 1 CALLS" },
+  { tag: "LOG", text: "BILLING ENGINE — 8 DOC TYPES" },
+  { tag: "LOG", text: "REPORT GEN → BULLMQ QUEUE" },
+  { tag: "NOW", text: "HEADS-DOWN, SHIPPING", now: true },
 ];
 
 const ticker = [
   "NODE.JS", "TYPESCRIPT", "GRAPHQL", "MONGODB", "REDIS", "BULLMQ",
-  "DOCKER", "AWS", "NEXT.JS", "REACT", "POSTGRES", "CI/CD",
+  "DOCKER", "AWS", "NEXT.JS", "REACT", "EXPRESS", "CI/CD",
 ];
 
 export default function Hero() {
   return (
     <section id="hero" className="relative border-b-2 border-foreground">
-      {/* Masthead strip */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="border-b border-border"
-      >
-        <div className="container flex items-center justify-between px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground md:px-6">
-          <span className="text-foreground">[ NIDHIN_M ]</span>
-          <span className="hidden sm:inline">SOFTWARE_ENGINEER // BACKEND·FULLSTACK</span>
-          <span className="inline-flex items-center gap-2 text-primary">
-            <span className="h-2 w-2 animate-flicker bg-primary" />
-            ONLINE
-          </span>
-        </div>
-      </motion.div>
-
       <div className="container px-4 py-14 md:px-6 md:py-20">
         <motion.div variants={container} initial="hidden" animate="show">
-          {/* eyebrow */}
+          {/* eyebrow — LinkedIn-continuity keyword line */}
           <motion.p
             variants={item}
             className="mb-6 text-xs font-medium uppercase tracking-[0.25em] text-primary"
           >
-            // BACKEND &amp; DISTRIBUTED SYSTEMS — EST. 2023
+            // FULL STACK (MERN) · NODE · TYPESCRIPT · REACT · HOSPITALITY SAAS · KOCHI, IN
           </motion.p>
 
-          {/* Massive headline */}
-          <motion.h1
-            variants={item}
-            className="font-display text-foreground"
-          >
-            <span className="block text-[clamp(3rem,13vw,11rem)]">BACKEND</span>
-            <span className="block text-[clamp(3rem,13vw,11rem)]">
-              SYSTEMS{" "}
-              <span
-                className="glitch bg-primary px-2 text-primary-foreground"
-                data-text="THAT"
-              >
-                THAT
+          {/* THE NAME IS THE MONUMENT */}
+          <motion.div variants={item} className="relative">
+            {/* NM monogram — placeholder block, swappable for 1-bit dithered photo */}
+            <div
+              aria-hidden
+              className="absolute -top-4 right-0 z-10 hidden h-20 w-20 items-center justify-center border-2 border-foreground bg-primary font-display text-4xl text-primary-foreground md:flex lg:h-24 lg:w-24 lg:text-5xl"
+            >
+              NM
+            </div>
+
+            <h1
+              className="glitch font-display text-[clamp(3.5rem,16vw,13rem)] text-foreground"
+              data-text="NIDHIN M"
+            >
+              NIDHIN M
+            </h1>
+
+            {/* stamp bar — the claim rides on the name */}
+            <div className="relative z-10 -mt-3 inline-block -rotate-1 border-2 border-foreground bg-primary px-4 py-2 md:-mt-6 md:px-6">
+              <span className="font-display text-base text-primary-foreground md:text-2xl">
+                I FIX THE QUERY NOBODY ELSE NOTICED
               </span>
-            </span>
-            <span className="block text-[clamp(3rem,13vw,11rem)] text-muted-foreground">
-              HOLD UNDER LOAD
-            </span>
-          </motion.h1>
+            </div>
+          </motion.div>
 
           {/* lower band */}
           <div className="mt-12 grid gap-0 border-2 border-foreground md:mt-16 lg:grid-cols-12">
-            {/* Left: pitch */}
+            {/* Left: pitch + CTAs */}
             <motion.div
               variants={item}
               className="border-b-2 border-foreground p-6 md:p-8 lg:col-span-7 lg:border-b-0 lg:border-r-2"
             >
               <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
-                3 years building B2B SaaS — multi-tenant property management
-                platforms, OTA sync pipelines, billing engines. I design for the
-                moment the data gets large and the edge cases get real, not just the
-                happy path in dev.
+                Three years of full-stack MERN in B2B SaaS — currently hospitality
+                tech: property management, OTA sync, billing. Most of my time goes
+                into the backend, keeping that stuff correct.
               </p>
 
-              <div className="mt-8 flex flex-col gap-0 sm:flex-row">
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
                 <Link
                   href="/#projects"
                   className="group inline-flex items-center justify-center gap-2 bg-primary px-6 py-4 text-xs font-bold uppercase tracking-[0.15em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
                 >
-                  VIEW THE WORK
+                  SEE THE FIXES
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
-                  href="/#contact"
-                  className="inline-flex items-center justify-center border-2 border-foreground px-6 py-4 text-xs font-bold uppercase tracking-[0.15em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:border-l-0"
+                  href="mailto:nidhinmohannidhin@gmail.com"
+                  className="text-sm lowercase text-muted-foreground underline underline-offset-4 transition-colors hover:text-primary"
                 >
-                  GET IN TOUCH
+                  or just email me
                 </Link>
               </div>
             </motion.div>
 
-            {/* Right: data readout */}
+            {/* Right: worklog */}
             <motion.div variants={item} className="lg:col-span-5">
               <div className="flex items-center justify-between border-b-2 border-foreground bg-foreground px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-background">
-                <span>SYSTEM_STATUS.LOG</span>
+                <span>WORKLOG.TXT</span>
                 <span className="animate-blink">█</span>
               </div>
-              <dl className="text-xs">
-                {readout.map((row, i) => (
-                  <div
-                    key={row.k}
-                    className={`flex items-center justify-between gap-4 px-4 py-[0.6rem] ${
-                      i !== readout.length - 1 ? "border-b border-border" : ""
+              <ul>
+                {worklog.map((row, i) => (
+                  <li
+                    key={row.text}
+                    className={`flex items-center gap-3 px-4 py-[0.6rem] ${
+                      i !== worklog.length - 1 ? "border-b border-border" : ""
                     }`}
                   >
-                    <dt className="text-muted-foreground">{row.k}</dt>
-                    <dd className="flex items-center gap-2 text-foreground">
-                      {row.signal && <span className="h-2 w-2 animate-flicker bg-primary" />}
-                      <span className="font-medium">{row.v}</span>
+                    <span
+                      className={`shrink-0 text-[10px] font-bold tracking-[0.14em] ${
+                        row.now ? "text-primary" : "text-muted-foreground"
+                      }`}
+                    >
+                      {row.tag}
+                    </span>
+                    <span
+                      className={`flex items-center gap-2 ${
+                        row.promoted
+                          ? "text-sm font-bold text-foreground md:text-base"
+                          : "text-xs text-muted-foreground"
+                      }`}
+                    >
+                      {row.now && <span className="h-2 w-2 animate-flicker bg-primary" />}
+                      {row.text}
                       {row.note && (
-                        <span className="bg-primary px-1 font-bold text-primary-foreground">
+                        <span className="bg-primary px-1 text-xs font-bold text-primary-foreground">
                           {row.note}
                         </span>
                       )}
-                    </dd>
-                  </div>
+                    </span>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </motion.div>
           </div>
         </motion.div>

@@ -105,7 +105,7 @@ export default function SkillsSection() {
         <div className="mx-auto max-w-6xl">
           <SectionHead n="04" tag="SKILLS" meta={`${skillCategories.length} DOMAINS`} title="THE TOOLKIT" />
           <p className="mb-12 max-w-xl text-sm text-muted-foreground">
-            Organized by domain — not a flat wall of logos.
+            Grouped by what I actually use them for.
           </p>
 
           {/* Skills rows */}

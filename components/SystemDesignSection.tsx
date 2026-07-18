@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionHead from "@/components/SectionHead";
 
@@ -14,9 +15,9 @@ const learnings = [
   {
     title: "The Cron Job That Silently Did Nothing",
     description:
-      "A booking sync job failed mid-run but exited cleanly — zero errors thrown, zero records processed, zero alerts fired. It took 3 days for a hotel client to notice stale availability data. The job 'succeeded' because nothing explicitly threw an exception.",
+      "A scheduled sync job failed mid-run but exited cleanly — zero errors thrown, zero records processed, zero alerts fired. It took days for anyone to notice the downstream data was stale. The job 'succeeded' because nothing explicitly threw an exception.",
     takeaway:
-      "Every background job now logs: records processed, records failed, and total duration. Zero records processed is an alert, not a success. Exit codes and try/catch aren't enough — you have to assert that the job actually did what it was supposed to do.",
+      "Every background job now logs records processed, records failed, and total duration. A run that processes zero records fires an alert. Try/catch alone can't catch a job that quietly does nothing.",
   },
   {
     title: "Schema Change Without a Migration Plan",
@@ -24,6 +25,13 @@ const learnings = [
       "Changed a MongoDB document shape in production without accounting for the existing documents. Old and new shapes coexisted in the collection, and the API returned inconsistent data for nearly a day before I caught it. There was no rollback path.",
     takeaway:
       "Now I treat every schema change as a multi-step process: add new field with a safe default, backfill existing documents, then remove the old field once the codebase no longer reads it. Never a one-shot swap in production.",
+  },
+  {
+    title: "The Backend That Only Worked With My Frontend",
+    description:
+      "As the full-stack dev on both ends, I shipped backend code shaped around my own frontend — response shapes matched my components, and some business rules lived client-side because it was faster to put them there. Then a mobile app joined the product. A mobile team can't ship an app-store release every time a small rule changes, so they needed everything as clean, complete APIs with the logic on the server. Worse: we were maintaining REST and GraphQL for the same features — two implementations of the same business logic, drifting apart a little more with every change.",
+    takeaway:
+      "We refactored to a shared service layer: business logic lives once in services, and the REST controllers and GraphQL resolvers are thin adapters over the same functions. A change lands in one place and every client — web, mobile, whatever comes next — gets it. The rule since then: business logic lives in services, controllers and resolvers stay thin.",
   },
 ];
 
@@ -78,6 +86,15 @@ export default function SystemDesignSection() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <Link
+              href="/writing"
+              className="inline-flex items-center gap-2 border-2 border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-[0.15em] text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              READ THE FULL POSTMORTEMS →
+            </Link>
           </div>
         </div>
       </div>

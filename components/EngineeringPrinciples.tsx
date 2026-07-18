@@ -7,7 +7,7 @@ const principles = [
   {
     title: "Handle Errors Explicitly",
     description:
-      "Every external call can fail. I don't rely on generic catch blocks — I think about what specifically can go wrong and handle each case. Silent failures are production incidents waiting to happen.",
+      "Every external call can fail. I think about what specifically can go wrong and handle each case, because I've watched a job fail without throwing and take days to get noticed.",
   },
   {
     title: "Design Schemas for How You Read",
@@ -17,7 +17,7 @@ const principles = [
   {
     title: "Keep It Readable",
     description:
-      "The best code is the code someone else can debug at 3 AM. I'll pick a clear approach over a clever one. If I need a comment to explain what something does, I usually rewrite it instead.",
+      "Someone else will have to change this code without me around. I pick the boring approach over the clever one, and if something needs a comment to explain what it does, I usually rewrite it instead.",
   },
   {
     title: "Ship, Then Improve",

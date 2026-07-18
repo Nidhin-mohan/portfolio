@@ -5,20 +5,26 @@ import SectionHead from "@/components/SectionHead";
 
 const journey = [
   {
-    year: "2020",
-    title: "Diploma & First Steps Into Code",
+    year: "2018–21",
+    title: "Hardware Before Software",
     description:
-      "Completed a Diploma in Electronics and Communication. Got curious about web development on the side — started with HTML, CSS, and JavaScript. Self-taught path began here.",
+      "Diploma in Electronics and Communication — circuits, signals, and systems before a single line of JavaScript. Learning how things fail at the physical layer turned out to be good training for debugging distributed ones.",
   },
   {
-    year: "2021–22",
-    title: "Full-Stack Bootcamp & Building",
+    year: "2020–22",
+    title: "Telecom Field Engineer",
     description:
-      "Completed a Full Stack JavaScript bootcamp. Built personal projects with React and Node.js, learned Express, MongoDB schema design by making mistakes, and got comfortable shipping things end-to-end.",
+      "Two years keeping real-world telecom networks running. When something broke, a tower was down. Started teaching myself web development on the side and decided to switch for good.",
   },
   {
-    year: "2023",
-    title: "First Professional Role",
+    year: "2022–23",
+    title: "The Switch: Bootcamp & Internship",
+    description:
+      "Went all-in: Full Stack JavaScript bootcamp + internship. Built 15+ sites, an e-commerce app from scratch on the MERN stack, and made most of the classic MongoDB schema mistakes along the way.",
+  },
+  {
+    year: "2023–24",
+    title: "First Product Role",
     description:
       "Joined a multi-tenant enterprise SaaS team. Learned what it means to write code that multiple client organizations depend on — production bug fixes, performance tuning, BullMQ background jobs, and CI/CD with Azure DevOps.",
   },
@@ -26,7 +32,7 @@ const journey = [
     year: "2025–Now",
     title: "Backend-Heavy Systems in Hospitality",
     description:
-      "Building a PMS and Channel Manager that syncs room inventory, rates, and bookings across OTA platforms. Solved a 99% query bottleneck, built a billing module covering multiple invoice types, and manage staging deployments on AWS EC2 and S3.",
+      "Building a PMS and Channel Manager that syncs room inventory, rates, and bookings across 8+ OTA platforms. Solved a 99% query bottleneck, built a billing module covering 8 invoice types, and manage staging deployments on AWS EC2 and S3.",
   },
 ];
 
@@ -63,7 +69,7 @@ export default function AboutSection() {
                 <code className="border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.8125rem] text-foreground">
                   BullMQ
                 </code>{" "}
-                queues for background jobs that have to be reliable — not just &quot;run and hope.&quot;
+                queues for background jobs, with retries and enough logging to know when a run went wrong.
               </p>
             </div>
             <div className="space-y-4">
@@ -77,9 +83,9 @@ export default function AboutSection() {
                 on my machine.&quot;
               </p>
               <p>
-                I&apos;m not claiming to be a system architect. But I think carefully about how my
-                code fits into the bigger picture — what breaks when this changes, what happens
-                under load, and whether this solution will survive the next feature request.
+                Three years in, most of what I know about design came from watching things break.
+                Before I ship, I ask two questions: what happens to this under load, and what
+                happens when the next feature request touches it.
               </p>
             </div>
           </div>
@@ -128,8 +134,7 @@ export default function AboutSection() {
               <p className="text-sm font-bold uppercase tracking-[0.04em] text-foreground">
                 Diploma in Electronics &amp; Communication
               </p>
-              <p className="mt-1 text-sm text-muted-foreground">Govt Polytechnic Cherthala · 2020 · Grade 8/10</p>
-              <p className="mt-1 text-xs text-muted-foreground/60">15 years of formal education</p>
+              <p className="mt-1 text-sm text-muted-foreground">Govt Polytechnic Cherthala · 2018–2021 · Grade 8/10</p>
             </div>
             <div className="p-5">
               <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">

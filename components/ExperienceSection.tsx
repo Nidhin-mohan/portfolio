@@ -14,27 +14,39 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    role: "Software Engineer",
+    role: "MERN Stack Developer",
     company: "PMS & Channel Manager Platform",
     period: "Mar 2025 – Present",
     type: "Full-time",
     bullets: [
       "Identified and resolved an N+1 query bottleneck in a cron-based OTA sync pipeline — reduced MongoDB queries from 401 to 5 per cycle (99% reduction), enabling 10x more OTA integrations without infrastructure changes",
-      "Optimized OTA synchronization with bulk processing, reducing API traffic by ~96% per channel and reducing overbooking scenarios across connected distribution channels",
-      "Integrated Simplotel OTA via third-party APIs and webhooks for real-time inventory, rate, and booking synchronization across multiple distribution channels",
+      "Optimized OTA synchronization with bulk multi-date processing — collapsed a 60-day inventory update from 60 sequential HTTP calls to 1 per channel, reducing overbooking scenarios across connected distribution channels",
+      "Integrated OTA distribution channels via third-party APIs and webhooks for real-time inventory, rate, and booking synchronization",
       "Designed and built a Billing & Invoicing Module supporting Proforma Invoices, Tax Invoices (B2B & B2C), split billing, and bill merging — covering activity-based and restaurant billing for hospitality workflows",
-      "Redesigned the room occupancy and pricing model — replaced a hard-coded fixed-limit system with fully configurable per-hotel occupancy, extra bed/person pricing, and OTA-aligned rate behavior",
-      "Built sales reports and visual dashboards surfacing insights into revenue, billing activity, and payment trends",
+      "Redesigned the room occupancy and pricing model into a fully configurable per-hotel system — per-guest rates, extra-bed pricing, and OTA-aligned rate behavior",
+      "Built sales reports and dashboards covering revenue, billing activity, and payment trends",
     ],
     stack: ["Node.js", "TypeScript", "GraphQL", "MongoDB", "Redis", "AWS", "Docker", "PM2"],
   },
   {
-    role: "Associate Software Engineer",
+    role: "Freelance Web Developer",
+    company: "Independent clients",
+    period: "Dec 2024 – Feb 2025",
+    type: "Contract",
+    bullets: [
+      "Built a listing page and inventory-management dashboard for a truck rental platform",
+      "Modularized an existing product application to improve scalability and maintainability, alongside bug fixes across live systems",
+    ],
+    stack: ["React", "Node.js", "MongoDB", "Express.js"],
+  },
+  {
+    role: "Associate Software Developer",
     company: "Enterprise Contract Management SaaS",
-    period: "Apr 2023 – Nov 2024",
+    period: "Mar 2023 – Dec 2024",
     type: "Full-time",
     bullets: [
       "Developed features across the contract lifecycle workflow including notification management, dynamic questionnaires, and external party collaboration — shipped to multiple enterprise client organizations",
+      "Built a shared library of reusable React components with native TypeScript support, cutting code duplication by 30% and accelerating feature delivery across client versions",
       "Moved report generation from frontend to backend using existing BullMQ-based background processing, reducing client-side load and improving scalability for bulk operations",
       "Improved query performance using MongoDB aggregation pipelines and optimized React frontend with hooks and memoization, improving maintainability across client versions",
       "Resolved critical production issues across different client deployments, maintaining application stability and uptime across enterprise customer instances",
@@ -51,7 +63,7 @@ export default function ExperienceSection() {
         <div className="mx-auto max-w-6xl">
           <SectionHead n="02" tag="EXPERIENCE" meta="2023 — PRESENT" title="WHAT I'VE SHIPPED" />
           <p className="mb-12 max-w-xl text-sm text-muted-foreground">
-            Impact and outcomes — not just job descriptions.
+            Three roles, most recent first.
           </p>
 
           {/* Timeline */}

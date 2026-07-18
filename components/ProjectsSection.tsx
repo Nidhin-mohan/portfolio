@@ -24,6 +24,7 @@ interface Project {
   hardPart: string;
   stack: string[];
   repoUrl?: string;
+  liveUrl?: string;
 }
 
 const projects: Project[] = [
@@ -33,11 +34,11 @@ const projects: Project[] = [
     category: "Backend-Heavy",
     type: "Professional",
     problem:
-      "Hotels need a single system to manage their full operations — room inventory, bookings, billing — and simultaneously keep availability, rates, and reservations in sync across multiple OTA distribution channels (Simplotel, etc.) and third-party PMS integrations. Keeping this data consistent across systems without overbooking is the core reliability problem.",
+      "Hotels need one system for inventory, bookings, and billing — that also keeps rates and availability in sync across 8+ OTA channels (Booking.com, Expedia, Agoda and more). Keeping that data consistent without overbooking is the core reliability problem.",
     whatIBuilt:
-      "Built the backend for a combined PMS and Channel Manager platform. On the PMS side: redesigned the room occupancy and pricing model to be fully configurable per hotel (replaced a hard-coded fixed-limit system), updated the booking engine to support dynamic occupancy rules and channel-aligned pricing, and built a Billing & Invoicing Module covering Proforma Invoices, Tax Invoices (B2B & B2C), split billing, bill merging, and activity-based restaurant billing. On the distribution side: integrated Simplotel and other OTAs via third-party APIs and webhooks, and wired up integrations with external PMS systems. Built sales reports and dashboards for revenue, billing, and payment trends.",
+      "Backend work across the platform: a configurable per-hotel occupancy and pricing model, a Billing & Invoicing module covering 8 document types with a multi-settlement payment workflow, OTA and third-party integrations, and sales dashboards for revenue and payment trends.",
     hardPart:
-      "The OTA sync pipeline had a severe N+1 query problem — 401 MongoDB queries per cron cycle. It looked fine in dev with small data, but in production it became a hard ceiling on how many OTAs we could support. Profiling with realistic data identified the pattern. Refactored to batch all lookups upfront: 401 queries collapsed to 5 (99% reduction), enabling 10x more OTA integrations without infrastructure changes. Also introduced bulk API calls, reducing external API traffic by ~96% per channel.",
+      "The OTA sync had a severe N+1 query problem — 401 database queries per cycle. Invisible in dev with small data; a hard scaling ceiling in production. Profiling with realistic data found it, and batching lookups upfront collapsed it to 5 queries (−99%). Bulk multi-date calls cut a 60-day sync from 60 HTTP calls to 1 per channel.",
     stack: ["Node.js", "TypeScript", "GraphQL", "MongoDB", "Redis", "Docker", "AWS EC2/S3", "PM2"],
   },
   {
@@ -46,13 +47,14 @@ const projects: Project[] = [
     category: "Full-Stack",
     type: "Personal",
     problem:
-      "Users needed a private way to track moods over time and understand patterns — not just log entries, but surface real trends. Therapists needed a separate view with different data access boundaries from regular users.",
+      "Users needed a private way to log moods and see how they trend over time. Therapists needed their own view, with hard limits on which patient data they can see.",
     whatIBuilt:
-      "MERN app with layered architecture (Controllers → Services → Repositories) and a generic BaseRepository pattern for reusable CRUD operations. Custom JWT-based RBAC with three roles (user, therapist, admin) — fine-grained control over therapist-patient data boundaries without a third-party auth service. Mood analytics built with MongoDB aggregation pipelines, keeping computation server-side. Full CI/CD pipeline with GitHub Actions: automated tests, Docker image builds pushed to AWS ECR, deployed to EC2 with static assets served via S3 and CloudFront.",
+      "MERN app with layered architecture (Controllers → Services → Repositories) and a generic BaseRepository pattern for reusable CRUD operations. Custom JWT-based RBAC with three roles (user, therapist, admin) — fine-grained control over therapist-patient data boundaries without a third-party auth service. Mood analytics built with MongoDB aggregation pipelines, keeping computation server-side. Full CI/CD pipeline with GitHub Actions: a Jest test suite gates every build, Docker images are pushed to AWS ECR, deployed to EC2 with static assets served via S3 and CloudFront.",
     hardPart:
-      "Designing the mood data model to support both quick daily log entries and efficient trend queries across date ranges, without scanning the full collection. Settled on date-bucketed documents that MongoDB's aggregation framework can window over efficiently. Building the full AWS deployment pipeline (ECR → EC2 → CloudFront) end-to-end solo surfaced a lot of infrastructure knowledge I hadn't had before.",
+      "Designing the mood data model to support both quick daily log entries and efficient trend queries across date ranges, without scanning the full collection. Settled on date-bucketed documents that MongoDB's aggregation framework can window over efficiently. Building the AWS deployment pipeline (ECR → EC2 → CloudFront) alone taught me most of what I now know about infrastructure.",
     stack: ["React", "Node.js", "MongoDB", "TypeScript", "Docker", "AWS ECR/EC2/S3/CloudFront", "GitHub Actions", "JWT"],
-    repoUrl: "https://github.com/Nidhin-mohan",
+    repoUrl: "https://github.com/Nidhin-mohan/moodmate",
+    liveUrl: "https://moodmate.dpdns.org",
   },
 ];
 
@@ -63,7 +65,7 @@ export default function ProjectsSection() {
         <div className="mx-auto max-w-6xl">
           <SectionHead n="01" tag="PROJECTS" meta={`${projects.length} SELECTED`} title="WHAT I BUILT" />
           <p className="mb-12 max-w-xl text-sm text-muted-foreground">
-            Problem, approach, and what was actually hard — not a list of features.
+            For each project: the problem, what I built, and where it got hard.
           </p>
 
           {/* Project Cards */}
@@ -118,17 +120,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               {project.type}
             </span>
           </div>
-          {project.repoUrl && (
-            <Link
-              href={project.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground transition-colors hover:text-primary"
-            >
-              <GithubIcon className="h-3.5 w-3.5" />
-              CODE →
-            </Link>
-          )}
+          <div className="flex items-center gap-4">
+            {project.liveUrl && (
+              <Link
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 bg-primary px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+              >
+                <span className="h-1.5 w-1.5 animate-flicker rounded-none bg-primary-foreground" />
+                LIVE →
+              </Link>
+            )}
+            {project.repoUrl && (
+              <Link
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-foreground transition-colors hover:text-primary"
+              >
+                <GithubIcon className="h-3.5 w-3.5" />
+                CODE →
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
