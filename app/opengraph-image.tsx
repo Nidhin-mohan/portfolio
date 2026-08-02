@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Nidhin M — I fix the query nobody else noticed";
+export const alt = "Nidhin M — Software Engineer, backend first";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -79,7 +79,7 @@ export default function OpengraphImage() {
               border: `3px solid ${BLACK}`,
             }}
           >
-            I FIX THE QUERY NOBODY ELSE NOTICED
+            SOFTWARE ENGINEER · BACKEND FIRST
           </span>
         </div>
 

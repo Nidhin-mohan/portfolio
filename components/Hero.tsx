@@ -40,7 +40,7 @@ export default function Hero() {
             variants={item}
             className="mb-6 text-xs font-medium uppercase tracking-[0.25em] text-primary"
           >
-            // FULL STACK (MERN) · NODE · TYPESCRIPT · REACT · HOSPITALITY SAAS · KOCHI, IN
+            // NODE · TYPESCRIPT · REACT · MONGODB · HOSPITALITY SAAS · KOCHI, IN
           </motion.p>
 
           {/* THE NAME IS THE MONUMENT */}
@@ -60,10 +60,10 @@ export default function Hero() {
               NIDHIN M
             </h1>
 
-            {/* stamp bar — the claim rides on the name */}
+            {/* stamp bar — the role rides on the name */}
             <div className="relative z-10 -mt-3 inline-block -rotate-1 border-2 border-foreground bg-primary px-4 py-2 md:-mt-6 md:px-6">
               <span className="font-display text-base text-primary-foreground md:text-2xl">
-                I FIX THE QUERY NOBODY ELSE NOTICED
+                SOFTWARE ENGINEER · BACKEND FIRST
               </span>
             </div>
           </motion.div>
@@ -86,7 +86,7 @@ export default function Hero() {
                   href="/#projects"
                   className="group inline-flex items-center justify-center gap-2 bg-primary px-6 py-4 text-xs font-bold uppercase tracking-[0.15em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
                 >
-                  SEE THE FIXES
+                  SEE THE WORK
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
