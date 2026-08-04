@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "node -e \"require('node:fs').rmSync('.next',{recursive:true,force:true})\"",
+    "test:routes": "npm run clean && next build && node --test scripts/route-test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.1.1",

@@ -45,13 +45,16 @@ export default function Hero() {
 
           {/* THE NAME IS THE MONUMENT */}
           <motion.div variants={item} className="relative">
-            {/* NM monogram — placeholder block, swappable for 1-bit dithered photo */}
-            <div
-              aria-hidden
-              className="absolute -top-4 right-0 z-10 hidden h-20 w-20 items-center justify-center border-2 border-foreground bg-primary font-display text-4xl text-primary-foreground md:flex lg:h-24 lg:w-24 lg:text-5xl"
+            {/* NM monogram — and the door to /genjutsu. Deliberately not the
+                name: clicking a name at the top of a page means "go home" to
+                everyone, and this goes somewhere else entirely. */}
+            <Link
+              href="/genjutsu"
+              aria-label="Tsukuyomi — a WebGL experiment"
+              className="absolute -top-4 right-0 z-10 flex h-14 w-14 items-center justify-center border-2 border-foreground bg-primary font-display text-3xl text-primary-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground md:h-20 md:w-20 md:text-4xl lg:h-24 lg:w-24 lg:text-5xl"
             >
               NM
-            </div>
+            </Link>
 
             <h1
               className="glitch font-display text-[clamp(3.5rem,16vw,13rem)] text-foreground"
