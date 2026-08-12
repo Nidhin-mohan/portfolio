@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Writing — Nidhin M | Postmortems & Backend Patterns",
   description:
-    "Production postmortems and backend patterns from building OTA sync pipelines, billing systems, and MERN applications.",
+    "Production postmortems and backend patterns from building OTA sync pipelines, billing systems, and the integrations around them.",
 };
 
 interface Post {
@@ -19,16 +19,17 @@ interface Post {
 
 const posts: Post[] = [
   {
-    id: "n-plus-one-sync-pipeline",
-    title: "The N+1 Query That Killed a Sync Pipeline",
-    tags: ["MongoDB", "Performance", "Cron"],
+    id: "backend-that-only-worked-with-my-frontend",
+    title: "The Backend That Only Worked With My Frontend",
+    tags: ["API Design", "GraphQL", "Architecture"],
     body: [
-      "A scheduled sync job looked quick in development. In production, with real data volumes, each cycle was firing 401 MongoDB queries — one lookup per record, inside a loop. The textbook N+1 shape.",
-      "The dangerous part: nothing was broken. No errors, no timeouts — just a job quietly becoming a scaling ceiling. The pattern only surfaced when I profiled a cycle against production-scale data and counted the round trips.",
-      "The fix wasn't clever: hoist every in-loop lookup into a few batched prefetch queries before the loop, then read from in-memory maps inside it. 401 queries collapsed to 5 per cycle — a 99% reduction. The same pass batched the outbound side too: a 60-day update went from 60 sequential HTTP calls to 1.",
+      "As the full-stack developer on both ends, I shipped backend code shaped around my own frontend. Response payloads matched my components. Some business rules lived client-side, because when you own both ends, putting logic wherever you're currently typing is always faster.",
+      "Then a mobile app joined the product, and everything I'd cut corners on became their problem. A mobile team can't ship an app-store release every time a small rule changes — they need complete, client-agnostic APIs with the rules on the server. Every place I'd let logic leak into my web frontend was now something to re-implement, and keep in sync, in a second client.",
+      "It compounded: we were maintaining REST and GraphQL for the same features. Two implementations of the same business logic, drifting a little further apart with every change — fix a rule in the resolver, forget the controller, ship a subtle inconsistency.",
+      "The refactor moved business logic into a shared service layer. REST controllers and GraphQL resolvers became thin adapters over the same functions: a change lands once, and web, mobile, and whatever client comes next all get it.",
     ],
     takeaway:
-      "Profile background jobs with production-scale data before shipping. Query count per cycle is part of the definition of done — an N+1 that's invisible at 10 records is an outage at 10,000.",
+      "Design APIs as if you've never met the client. Rules live on the server, transport layers stay thin, and business logic exists in exactly one place.",
   },
   {
     id: "cron-job-that-did-nothing",
@@ -55,17 +56,16 @@ const posts: Post[] = [
       "Expand → backfill → contract. In a schemaless store the migration discipline has to live in your process, because the database won't enforce it for you.",
   },
   {
-    id: "backend-that-only-worked-with-my-frontend",
-    title: "The Backend That Only Worked With My Frontend",
-    tags: ["API Design", "GraphQL", "Architecture"],
+    id: "n-plus-one-sync-pipeline",
+    title: "The N+1 That Only Showed Up At Production Scale",
+    tags: ["MongoDB", "Performance", "Cron"],
     body: [
-      "As the full-stack developer on both ends, I shipped backend code shaped around my own frontend. Response payloads matched my components. Some business rules lived client-side, because when you own both ends, putting logic wherever you're currently typing is always faster.",
-      "Then a mobile app joined the product, and everything I'd cut corners on became their problem. A mobile team can't ship an app-store release every time a small rule changes — they need complete, client-agnostic APIs with the rules on the server. Every place I'd let logic leak into my web frontend was now something to re-implement, and keep in sync, in a second client.",
-      "It compounded: we were maintaining REST and GraphQL for the same features. Two implementations of the same business logic, drifting a little further apart with every change — fix a rule in the resolver, forget the controller, ship a subtle inconsistency.",
-      "The refactor moved business logic into a shared service layer. REST controllers and GraphQL resolvers became thin adapters over the same functions: a change lands once, and web, mobile, and whatever client comes next all get it.",
+      "A scheduled sync job looked quick in development. In production, with real data volumes, each cycle was firing 401 MongoDB queries — one lookup per record, inside a loop. The textbook N+1 shape, and I shipped it.",
+      "Nothing was broken, which is why it lasted. No errors, no timeouts — just a job quietly turning into a ceiling. It surfaced only when I profiled a cycle against production-scale data and counted the round trips, which I should have done before it went out.",
+      "The fix wasn't clever: hoist every in-loop lookup into a few batched prefetch queries before the loop, then read from in-memory maps inside it. 401 queries collapsed to 5. The same pass batched the outbound side, and a 60-day update went from 60 sequential HTTP calls to 1. The harder problem was that my development environment was never going to surface this on its own.",
     ],
     takeaway:
-      "Design APIs as if you've never met the client. Rules live on the server, transport layers stay thin, and business logic exists in exactly one place.",
+      "Profile background jobs with production-scale data before shipping. Query count per cycle is part of the definition of done — an N+1 that's invisible at ten records is a ceiling at ten thousand.",
   },
 ];
 

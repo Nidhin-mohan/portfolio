@@ -37,7 +37,9 @@ const skillCategories: SkillCategory[] = [
       "Redis",
       "Cron Jobs",
       "Webhooks",
-      "Concurrency Control",
+      "XML / REST Integrations",
+      "Third-Party API Integration",
+      "Invoicing & Tax Modelling",
     ],
   },
   {
@@ -51,7 +53,6 @@ const skillCategories: SkillCategory[] = [
       "Schema Design",
       "Data Migration",
       "MongoDB Atlas",
-      "Query Performance",
     ],
   },
   {
@@ -79,7 +80,6 @@ const skillCategories: SkillCategory[] = [
       "Server-Side Rendering",
       "Zustand / Context",
       "Responsive Design",
-      "Accessibility",
     ],
   },
   {
@@ -88,12 +88,11 @@ const skillCategories: SkillCategory[] = [
     skills: [
       "Git",
       "Code Review",
-      "Jest & Testing Library",
+      "Jest",
       "Postman",
       "Zod",
       "Documentation",
       "Debugging",
-      "Agile / Scrum",
     ],
   },
 ];

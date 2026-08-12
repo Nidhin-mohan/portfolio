@@ -22,11 +22,11 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 const navItems = [
   { name: "Projects", href: "/#projects" },
+  { name: "Writing", href: "/writing" },
   { name: "Experience", href: "/#experience" },
   { name: "About", href: "/#about" },
   { name: "Skills", href: "/#skills" },
   { name: "Principles", href: "/#principles" },
-  { name: "Writing", href: "/writing" },
   { name: "Contact", href: "/#contact" },
 ];
 

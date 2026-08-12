@@ -31,7 +31,8 @@ const ROUTES = [
   },
   {
     path: "/writing",
-    expect: ["The N+1 Query That Killed a Sync Pipeline"],
+    // Assert the page's own heading, not a post title — copy moves, routing doesn't.
+    expect: ["LESSONS, WRITTEN DOWN"],
   },
   {
     path: "/genjutsu",

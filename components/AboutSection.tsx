@@ -32,7 +32,7 @@ const journey = [
     year: "2025–Now",
     title: "Backend-Heavy Systems in Hospitality",
     description:
-      "Building a PMS and Channel Manager that syncs room inventory, rates, and bookings across 8+ OTA platforms. Solved a 99% query bottleneck, built a billing module covering 8 invoice types, and manage staging deployments on AWS EC2 and S3.",
+      "Building a PMS and Channel Manager. Built the billing and invoicing module from scratch, covering eight document types on one data model. Redesigned room pricing into a per-hotel configurable system. Keep rates and availability in sync across 8+ OTA channels, and handle staging deployments on AWS EC2 and S3.",
   },
 ];
 
@@ -41,15 +41,16 @@ export default function AboutSection() {
     <section id="about" className="relative w-full border-b-2 border-foreground py-16 md:py-24">
       <div className="container relative px-4 md:px-6">
         <div className="mx-auto max-w-6xl">
-          <SectionHead n="03" tag="ABOUT" meta="SELF-TAUGHT" title="RELIABLE BY DEFAULT" />
+          <SectionHead n="03" tag="ABOUT" meta="SELF-TAUGHT" title="WATCHED THINGS BREAK" />
 
           {/* Narrative */}
           <div className="mb-14 grid gap-8 border-2 border-foreground bg-card p-6 text-[0.9375rem] leading-relaxed text-muted-foreground md:p-8 lg:grid-cols-2">
             <div className="space-y-4">
               <p>
-                I&apos;m a full-stack engineer with a strong backend focus. My day-to-day is building
-                the systems that hotels and hospitality businesses depend on — OTA sync pipelines,
-                billing engines, room pricing logic, and the APIs that connect it all.
+                I&apos;m a backend-focused fullstack engineer. I work on a hospitality platform:
+                the property management system a hotel runs its front desk on, and the channel
+                manager that keeps its rooms bookable on Booking.com, Expedia, Agoda and six
+                others.
               </p>
               <p>
                 Most of my work lives in{" "}
@@ -64,8 +65,8 @@ export default function AboutSection() {
                 <code className="border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.8125rem] text-foreground">
                   MongoDB
                 </code>{" "}
-                as the primary store. I&apos;ve built GraphQL APIs, designed aggregation pipelines for
-                reporting, and wired up{" "}
+                as the primary store. I&apos;ve built REST and GraphQL APIs over a shared service
+                layer, designed aggregation pipelines for reporting, and wired up{" "}
                 <code className="border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.8125rem] text-foreground">
                   BullMQ
                 </code>{" "}
@@ -83,9 +84,9 @@ export default function AboutSection() {
                 on my machine.&quot;
               </p>
               <p>
-                Three years in, most of what I know about design came from watching things break.
-                Before I ship, I ask two questions: what happens to this under load, and what
-                happens when the next feature request touches it.
+                Most of what I know about design came from watching things break. Before I ship
+                I want to know how it behaves under load, and how much it fights back when the
+                next feature request lands on top of it.
               </p>
             </div>
           </div>

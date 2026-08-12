@@ -22,6 +22,9 @@ interface Project {
   problem: string;
   whatIBuilt: string;
   hardPart: string;
+  /** Optional headline numbers. Rendered as a strip under the title — the one
+      place on the site where the measurable results live. */
+  metrics?: { value: string; label: string }[];
   stack: string[];
   repoUrl?: string;
   liveUrl?: string;
@@ -33,12 +36,18 @@ const projects: Project[] = [
     subtitle: "Integrated property management and OTA distribution platform",
     category: "Backend-Heavy",
     type: "Professional",
+    metrics: [
+      { value: "401 → 5", label: "DB reads per sync cycle" },
+      { value: "60 → 1", label: "HTTP calls per 60-day update" },
+      { value: "8", label: "invoice document types" },
+      { value: "8+", label: "OTA channels in sync" },
+    ],
     problem:
-      "Hotels need one system for inventory, bookings, and billing — that also keeps rates and availability in sync across 8+ OTA channels (Booking.com, Expedia, Agoda and more). Keeping that data consistent without overbooking is the core reliability problem.",
+      "Hotels need one system for inventory, bookings, and billing, and it has to keep rates and availability aligned across 8+ OTA channels (Booking.com, Expedia, Agoda and more). The two failure modes that matter are a room sold twice and a guest charged the wrong amount.",
     whatIBuilt:
-      "Backend work across the platform: a configurable per-hotel occupancy and pricing model, a Billing & Invoicing module covering 8 document types with a multi-settlement payment workflow, OTA and third-party integrations, and sales dashboards for revenue and payment trends.",
+      "Backend work across the platform: a Billing & Invoicing module built from scratch, covering eight document types and a multi-settlement payment workflow. A configurable per-hotel occupancy and pricing model. The OTA and third-party integration surface. Sales dashboards for revenue and payment trends.",
     hardPart:
-      "The OTA sync had a severe N+1 query problem — 401 database queries per cycle. Invisible in dev with small data; a hard scaling ceiling in production. Profiling with realistic data found it, and batching lookups upfront collapsed it to 5 queries (−99%). Bulk multi-date calls cut a 60-day sync from 60 HTTP calls to 1 per channel.",
+      "Billing. Eight document types: proforma, tax invoice (B2B and B2C carry different tax treatment), split bills, merged bills, activity charges, restaurant charges. The obvious shape is eight collections, and it falls over at the first bill merge — combining two documents with different schemas means writing a translator for every pair. So it became one document model with a type discriminator, and only the genuinely varying fields pushed down per type: tax treatment, who the bill is addressed to, what it settles against. Splitting a bill re-points charge lines at another folio; merging does the reverse. The cost is that validation lives in code rather than in per-collection schemas, and the model carries fields that stay null for most types. The payoff is that adding a document type means a type and a tax rule, not another path from data model to PDF.",
     stack: ["Node.js", "TypeScript", "GraphQL", "MongoDB", "Redis", "Docker", "AWS EC2/S3", "PM2"],
   },
   {
@@ -154,6 +163,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </h3>
         <p className="mt-2 text-sm text-muted-foreground">{project.subtitle}</p>
       </div>
+
+      {/* Metrics strip — the numbers live here and nowhere else on the page. */}
+      {project.metrics && project.metrics.length > 0 && (
+        <div className="grid grid-cols-2 border-b-2 border-foreground md:grid-cols-4">
+          {project.metrics.map((metric, i) => (
+            <div
+              key={metric.label}
+              className={`flex flex-col justify-start gap-1 border-foreground px-4 py-4 md:px-5 md:py-5 ${
+                i % 2 !== 0 ? "border-l-2" : ""
+              } ${i >= 2 ? "border-t-2" : ""} ${
+                i >= 4 ? "md:border-t-2" : "md:border-t-0"
+              } ${i % 4 !== 0 ? "md:border-l-2" : "md:border-l-0"}`}
+            >
+              <span className="whitespace-nowrap font-display text-2xl leading-none text-foreground md:text-3xl lg:text-4xl">
+                {metric.value}
+              </span>
+              <span className="text-[10px] uppercase leading-snug tracking-[0.14em] text-muted-foreground">
+                {metric.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Content rows */}
       <div className="divide-y-2 divide-border">

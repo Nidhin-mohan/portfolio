@@ -19,11 +19,11 @@ const experiences: Experience[] = [
     period: "Mar 2025 – Present",
     type: "Full-time",
     bullets: [
-      "Identified and resolved an N+1 query bottleneck in a cron-based OTA sync pipeline — reduced MongoDB queries from 401 to 5 per cycle (99% reduction), enabling 10x more OTA integrations without infrastructure changes",
-      "Optimized OTA synchronization with bulk multi-date processing — collapsed a 60-day inventory update from 60 sequential HTTP calls to 1 per channel, reducing overbooking scenarios across connected distribution channels",
-      "Integrated OTA distribution channels via third-party APIs and webhooks for real-time inventory, rate, and booking synchronization",
-      "Designed and built a Billing & Invoicing Module supporting Proforma Invoices, Tax Invoices (B2B & B2C), split billing, and bill merging — covering activity-based and restaurant billing for hospitality workflows",
-      "Redesigned the room occupancy and pricing model into a fully configurable per-hotel system — per-guest rates, extra-bed pricing, and OTA-aligned rate behavior",
+      "Designed and built the Billing & Invoicing module from scratch — proforma invoices, tax invoices with separate B2B and B2C treatment, split billing, bill merging, activity-based and restaurant billing: eight document types over one data model, plus a multi-settlement payment workflow, data model through to PDF",
+      "Redesigned room occupancy and pricing from a fixed model into a per-hotel configurable one — per-guest rates, extra-bed pricing, and rate behaviour shaped to how OTAs expect to receive it",
+      "Built the OTA integration surface across Booking.com, Expedia, Agoda, Goibibo and six more — pushing rates and inventory over third-party XML and REST APIs and consuming booking webhooks, where the failure mode is a room sold twice",
+      "Batched the OTA sync job's per-record lookups and moved to the bulk multi-date endpoints — 401 MongoDB queries per cycle down to 5, and a 60-day inventory update from 60 HTTP calls to 1 per channel",
+      "Moved business logic out of controllers and resolvers into a shared service layer when a mobile client joined the product, so REST and GraphQL stopped carrying two drifting copies of the same rules",
       "Built sales reports and dashboards covering revenue, billing activity, and payment trends",
     ],
     stack: ["Node.js", "TypeScript", "GraphQL", "MongoDB", "Redis", "AWS", "Docker", "PM2"],
@@ -48,9 +48,9 @@ const experiences: Experience[] = [
       "Developed features across the contract lifecycle workflow including notification management, dynamic questionnaires, and external party collaboration — shipped to multiple enterprise client organizations",
       "Built a shared library of reusable React components with native TypeScript support, cutting code duplication by 30% and accelerating feature delivery across client versions",
       "Moved report generation from frontend to backend using existing BullMQ-based background processing, reducing client-side load and improving scalability for bulk operations",
-      "Improved query performance using MongoDB aggregation pipelines and optimized React frontend with hooks and memoization, improving maintainability across client versions",
-      "Resolved critical production issues across different client deployments, maintaining application stability and uptime across enterprise customer instances",
-      "Utilized CI/CD pipelines via Azure DevOps for staging deployments before production releases",
+      "Tuned slow report and list queries with MongoDB aggregation pipelines, and cut re-render cost on the heaviest React screens with memoization",
+      "Fixed production issues across separate client deployments, where the same bug could present differently depending on a tenant's configuration",
+      "Shipped through Azure DevOps pipelines — staging first, production after",
     ],
     stack: ["Node.js", "TypeScript", "MongoDB", "BullMQ", "React", "Azure DevOps", "MUI"],
   },
@@ -63,7 +63,7 @@ export default function ExperienceSection() {
         <div className="mx-auto max-w-6xl">
           <SectionHead n="02" tag="EXPERIENCE" meta="2023 — PRESENT" title="WHAT I'VE SHIPPED" />
           <p className="mb-12 max-w-xl text-sm text-muted-foreground">
-            Three roles, most recent first.
+            {experiences.length} roles, most recent first.
           </p>
 
           {/* Timeline */}

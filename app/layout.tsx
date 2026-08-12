@@ -23,32 +23,35 @@ const martianMono = Martian_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Nidhin Mohan | Full-Stack Developer — Backend Systems & APIs",
+  title: "Nidhin Mohan | Backend-Focused Fullstack Engineer",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
     apple: "/icon.svg",
   },
   description:
-    "Full-stack developer with a backend focus. 3+ years building production MERN applications with TypeScript, MongoDB, and GraphQL.",
+    "Backend-focused fullstack engineer. Billing, pricing, and OTA integrations in hospitality SaaS. Node.js, TypeScript, MongoDB, GraphQL.",
   keywords: [
-    "Full-Stack Engineer",
-    "Backend Developer",
+    "Backend Engineer",
+    "Fullstack Engineer",
     "Node.js",
     "TypeScript",
     "MongoDB",
     "GraphQL",
-    "MERN Stack",
     "REST APIs",
+    "Billing Systems",
+    "API Integrations",
+    "Channel Manager",
+    "Hospitality SaaS",
     "AWS",
     "Docker",
-    "CI/CD",
+    "Kochi",
   ],
   authors: [{ name: "Nidhin Mohan" }],
   openGraph: {
-    title: "Nidhin Mohan | Full-Stack Developer",
+    title: "Nidhin Mohan | Backend-Focused Fullstack Engineer",
     description:
-      "Full-stack developer with a backend focus. Building reliable APIs and systems with TypeScript, Node.js, and MongoDB.",
+      "Billing, pricing, and integrations with systems I don't control. Node.js, TypeScript, MongoDB.",
     url: "https://nidhinm.vercel.app",
     siteName: "Nidhin Mohan — Portfolio",
     locale: "en_US",
@@ -56,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nidhin Mohan | Full-Stack Engineer",
+    title: "Nidhin Mohan | Backend-Focused Fullstack Engineer",
     description:
-      "Full-stack developer with a backend focus. 3+ years of production MERN with TypeScript, MongoDB, and GraphQL.",
+      "Billing, pricing, and integrations with systems I don't control. Node.js, TypeScript, MongoDB.",
   },
   robots: {
     index: true,

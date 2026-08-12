@@ -14,11 +14,11 @@ const RATIO = 72 * 60 * 60;
  * fifteen seconds of anyone's actual life.
  */
 const EVIDENCE = [
-  { at: 0, stamp: "0000d", text: "OTA sync cron · 401 DB reads → 5" },
-  { at: 3, stamp: "0003d", text: "60-day bulk sync · 60 calls → 1" },
-  { at: 9, stamp: "0009d", text: "Billing engine · 8 document types" },
-  { at: 18, stamp: "0018d", text: "Report generation → BullMQ queue" },
-  { at: 30, stamp: "0030d", text: "3 years MERN · B2B hospitality SaaS" },
+  { at: 0, stamp: "0000d", text: "Billing & invoicing · 8 document types" },
+  { at: 3, stamp: "0003d", text: "Per-hotel occupancy & pricing model" },
+  { at: 9, stamp: "0009d", text: "Rate + inventory sync · 8 OTA channels" },
+  { at: 18, stamp: "0018d", text: "OTA sync cron · 401 DB reads → 5" },
+  { at: 30, stamp: "0030d", text: "B2B SaaS · BullMQ, billing, integrations" },
   { at: 45, stamp: "0045d", text: "Open to backend-heavy roles · Kochi / remote" },
 ];
 
@@ -379,7 +379,7 @@ export default function GenjutsuStage() {
               <span className="text-[var(--gj)]">hours</span>
             </h2>
             <p className="mt-4 max-w-md text-xs leading-relaxed text-[#ded5c9]/55">
-              That is what one second costs in here. Your second, my three years
+              That is what one second costs in here. Your second, my whole career so far
               — the record on the right is what I did with mine, and it is
               writing itself as you stand there. Time dilation is just a very
               large multiplier; not overflowing the counter is the hard part.

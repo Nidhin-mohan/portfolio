@@ -18,10 +18,10 @@ const item = {
 
 // Worklog: dated years deliberately stripped (discretion — see linkdn workspace).
 const worklog: { tag: string; text: string; note?: string; promoted?: boolean; now?: boolean }[] = [
-  { tag: "LOG", text: "CRON OTA SYNC — 401 → 5 DB READS", note: "−99%", promoted: true },
+  { tag: "LOG", text: "OTA SYNC — 401 → 5 DB READS", note: "−99%", promoted: true },
   { tag: "LOG", text: "60-DAY BULK SYNC — 60 → 1 CALLS" },
-  { tag: "LOG", text: "BILLING ENGINE — 8 DOC TYPES" },
-  { tag: "LOG", text: "REPORT GEN → BULLMQ QUEUE" },
+  { tag: "LOG", text: "INVOICING — 8 DOCUMENT TYPES" },
+  { tag: "LOG", text: "PER-HOTEL PRICING & OCCUPANCY" },
   { tag: "NOW", text: "HEADS-DOWN, SHIPPING", now: true },
 ];
 
@@ -79,9 +79,10 @@ export default function Hero() {
               className="border-b-2 border-foreground p-6 md:p-8 lg:col-span-7 lg:border-b-0 lg:border-r-2"
             >
               <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
-                Three years of full-stack MERN in B2B SaaS — currently hospitality
-                tech: property management, OTA sync, billing. Most of my time goes
-                into the backend, keeping that stuff correct.
+                Backend-focused fullstack, currently in hospitality SaaS. I work on
+                the parts where being wrong costs money — what a guest gets invoiced,
+                what a room costs tonight, and what eight booking channels think is
+                still available.
               </p>
 
               <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">

@@ -54,9 +54,13 @@ export default function ContactSection() {
       <div className="container relative px-4 md:px-6">
         <div className="mx-auto max-w-6xl">
           <SectionHead n="07" tag="CONTACT" meta="INBOX: OPEN" title="LET'S TALK" />
-          <p className="mb-12 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mb-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
             If you have a question about anything on this page, or a backend problem you want
             another pair of eyes on, email me. I read everything that isn&apos;t spam.
+          </p>
+
+          <p className="mb-10 text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+            Open to backend-heavy roles — Bangalore, Hyderabad, or remote.
           </p>
 
           <div className="grid border-2 border-foreground lg:grid-cols-2">

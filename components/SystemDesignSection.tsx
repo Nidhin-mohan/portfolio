@@ -6,11 +6,11 @@ import SectionHead from "@/components/SectionHead";
 
 const learnings = [
   {
-    title: "The N+1 Query That Killed a Sync Pipeline",
+    title: "The Backend That Only Worked With My Frontend",
     description:
-      "A cron-based OTA sync job was firing 401 MongoDB queries per cycle. It worked fine in development with small datasets — but in production, with growing hotel inventory, it became a bottleneck that blocked scaling to more OTA integrations. I didn't catch it because I never profiled with realistic data volumes.",
+      "As the full-stack dev on both ends, I shipped backend code shaped around my own frontend — response shapes matched my components, and some business rules lived client-side because it was faster to put them there. Then a mobile app joined the product. A mobile team can't ship an app-store release every time a small rule changes, so they needed everything as clean, complete APIs with the logic on the server. Worse: we were maintaining REST and GraphQL for the same features — two implementations of the same business logic, drifting apart a little more with every change.",
     takeaway:
-      "Profiling with real data collapsed it to 5 queries per cycle (99% reduction) by batching all lookups upfront. Now I always profile background jobs with production-scale data before shipping. Query count is part of the definition of done.",
+      "We refactored to a shared service layer: business logic lives once in services, and the REST controllers and GraphQL resolvers are thin adapters over the same functions. A change lands in one place and every client — web, mobile, whatever comes next — gets it. The rule since then: business logic lives in services, controllers and resolvers stay thin.",
   },
   {
     title: "The Cron Job That Silently Did Nothing",
@@ -27,11 +27,11 @@ const learnings = [
       "Now I treat every schema change as a multi-step process: add new field with a safe default, backfill existing documents, then remove the old field once the codebase no longer reads it. Never a one-shot swap in production.",
   },
   {
-    title: "The Backend That Only Worked With My Frontend",
+    title: "The N+1 That Only Showed Up At Production Scale",
     description:
-      "As the full-stack dev on both ends, I shipped backend code shaped around my own frontend — response shapes matched my components, and some business rules lived client-side because it was faster to put them there. Then a mobile app joined the product. A mobile team can't ship an app-store release every time a small rule changes, so they needed everything as clean, complete APIs with the logic on the server. Worse: we were maintaining REST and GraphQL for the same features — two implementations of the same business logic, drifting apart a little more with every change.",
+      "A cron-based OTA sync job ran one lookup per record inside a loop — 401 MongoDB queries per cycle. In development the test property had a handful of rooms, so nothing looked wrong. It stayed invisible until I ran it against production-scale data, which I hadn't done before shipping.",
     takeaway:
-      "We refactored to a shared service layer: business logic lives once in services, and the REST controllers and GraphQL resolvers are thin adapters over the same functions. A change lands in one place and every client — web, mobile, whatever comes next — gets it. The rule since then: business logic lives in services, controllers and resolvers stay thin.",
+      "Batching the lookups before the loop took an afternoon. The profiling gap was the real problem. Background jobs now get run against production-scale data before they ship, and I check query count per cycle instead of assuming it.",
   },
 ];
 
